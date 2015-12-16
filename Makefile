@@ -4,4 +4,4 @@ IMAGES = $(shell echo */ | sed 's/\///g')
 all: $(IMAGES)
 
 $(IMAGES):
-	cd $@ && docker build -t $@ . 
+	cd $@ && docker build -t localhost:5000/$@ .
