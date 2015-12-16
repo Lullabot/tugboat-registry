@@ -1,1 +1,1 @@
-# tugboat-repository
+# tugboat-registry
