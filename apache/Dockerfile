@@ -7,7 +7,7 @@ RUN apt-get update && \
     sed -i s/mailhub=mail/mailhub=172.17.42.1/ /etc/ssmtp/ssmtp.conf && \
     sed -i s/^hostname=/#hostname=/ /etc/ssmtp/ssmtp.conf && \
 
-    apt-get -y install apache2 && \
+    apt-get -y install apache2 apache2-utils && \
     a2enmod expires rewrite && \
     rm -rf /var/www/html && \
     ln -s /var/lib/tugboat/docroot /var/www/html && \
