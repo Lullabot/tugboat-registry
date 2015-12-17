@@ -4,6 +4,7 @@ IMAGES = $(shell echo */ | sed 's/\///g')
 all: $(IMAGES)
 
 couchdb: ubuntu
+memcached: ubuntu
 
 $(IMAGES):
 	cd $@ && docker build -t localhost:5000/$@ .
