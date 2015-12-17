@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+rm -rf /var/run/couchdb
+mkdir -p /var/run/couchdb
+chown couchdb:couchdb /var/run/couchdb
+exec su couchdb -c /usr/bin/couchdb

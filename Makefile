@@ -3,5 +3,7 @@ IMAGES = $(shell echo */ | sed 's/\///g')
 
 all: $(IMAGES)
 
+couchdb: ubuntu
+
 $(IMAGES):
 	cd $@ && docker build -t localhost:5000/$@ .
