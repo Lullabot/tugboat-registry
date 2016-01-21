@@ -10,6 +10,6 @@ COPY apache2-docker /usr/local/sbin/apache2-docker
 COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY conf-available/security.conf /etc/apache2/conf-available/security.conf
 
-LABEL tugboat.ready="curl -I http://localhost"
+LABEL tugboat.ready="curl -I http://127.0.0.1"
 
 CMD ["apache2-docker"]
