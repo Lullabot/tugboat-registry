@@ -9,4 +9,10 @@ RUN apt-get update && \
 
     echo "[user]" > ~/.gitconfig && \
     echo "    email = root@tugboat.qa" >> ~/.gitconfig && \
-    echo "    name = Tugboat" >> ~/.gitconfig
+    echo "    name = Tugboat" >> ~/.gitconfig && \
+
+    locale-gen en_US.UTF-8  
+
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
