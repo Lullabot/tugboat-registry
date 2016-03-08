@@ -6,7 +6,8 @@ RUN echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-or
     apt-get -y install mongodb-org
 
 COPY mongod.conf /etc/mongod.conf
+COPY mongod-docker /usr/local/bin/mongod-docker
 
 LABEL tugboat.ready="nc -z localhost 27017"
 
-CMD ["mongod", "--config", "/etc/mongod.conf"]
+CMD ["mongod-docker"]
