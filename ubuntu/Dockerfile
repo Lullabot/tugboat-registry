@@ -1,12 +1,4 @@
-# Use phusion/baseimage as base image. To make your builds
-# reproducible, make sure you lock down to a specific version, not
-# to `latest`! See
-# https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
-# for a list of version numbers.
-FROM phusion/baseimage:0.9.18
-
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
+FROM localhost:5000/baseimage
 
 RUN apt-get update && \
     apt-get -y install apt-transport-https build-essential curl git vim && \
@@ -26,4 +18,3 @@ RUN apt-get update && \
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8  
-
