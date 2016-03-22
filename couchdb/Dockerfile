@@ -3,7 +3,7 @@ FROM localhost:5000/ubuntu
 RUN mkdir /etc/service/couchdb && \
 
     apt-get update && \
-    apt-get -y install couchdb && \
+    apt-get -y --no-install-recommends install couchdb && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 

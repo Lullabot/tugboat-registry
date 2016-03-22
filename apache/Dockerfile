@@ -5,7 +5,7 @@ RUN mkdir /etc/service/apache2 && \
     mkdir /etc/service/apache2-error-forwarder && \
 
     apt-get update && \
-    apt-get -y install apache2 apache2-utils && \
+    apt-get -y --no-install-recommends install apache2 apache2-utils && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 
     a2enmod expires rewrite && \

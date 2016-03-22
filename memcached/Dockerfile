@@ -3,7 +3,7 @@ FROM localhost:5000/ubuntu
 RUN mkdir /etc/service/memcached && \
 
     apt-get update && \
-    apt-get -y install memcached && \
+    apt-get -y --no-install-recommends install memcached && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 

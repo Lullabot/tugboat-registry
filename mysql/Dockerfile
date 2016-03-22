@@ -1,6 +1,6 @@
 FROM localhost:5000/ubuntu
 
-RUN apt-get -y install mysql-server
+RUN apt-get -y --no-install-recommends install mysql-server
 
 RUN /usr/sbin/mysqld & \
     sleep 10 && \
