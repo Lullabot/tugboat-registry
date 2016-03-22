@@ -1,10 +1,13 @@
 FROM localhost:5000/ubuntu
 
-RUN apt-get -y install memcached
+RUN mkdir /etc/service/memcached && \
 
-COPY memcached-docker /usr/local/bin/memcached-docker
+    apt-get update && \
+    apt-get -y --no-install-recommends install memcached && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+COPY run /etc/service/memcached/run
 COPY memcached.conf /etc/memcached.conf
 
 LABEL tugboat.ready="nc -z localhost 11211"
-
-CMD ["memcached-docker"]

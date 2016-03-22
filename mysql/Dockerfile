@@ -1,6 +1,12 @@
 FROM localhost:5000/ubuntu
 
-RUN apt-get -y install mysql-server
+RUN mkdir /etc/service/mysql && \
+
+    apt-get update && \
+    apt-get -y --no-install-recommends install mysql-server && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY my.cnf /etc/mysql/my.cnf
 
 RUN /usr/sbin/mysqld & \
     sleep 10 && \
@@ -8,6 +14,4 @@ RUN /usr/sbin/mysqld & \
 
 LABEL tugboat.ready="mysqladmin ping"
 
-COPY tugboat.cnf /etc/mysql/conf.d/tugboat.cnf
-
-CMD ["/usr/bin/mysqld_safe"]
+COPY run /etc/service/mysql/run

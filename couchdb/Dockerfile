@@ -1,10 +1,13 @@
 FROM localhost:5000/ubuntu
 
-RUN apt-get -y install couchdb
+RUN mkdir /etc/service/couchdb && \
 
-COPY couchdb-docker /usr/local/bin/couchdb-docker
+    apt-get update && \
+    apt-get -y --no-install-recommends install couchdb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+COPY run /etc/service/couchdb/run
 COPY httpd.ini /etc/couchdb/default.d/httpd.ini
 
 LABEL tugboat.ready="curl -I http://127.0.0.1:5984"
-
-CMD ["couchdb-docker"]

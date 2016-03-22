@@ -4,7 +4,10 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     mkdir -p /root/.composer && \
 
-    apt-get -y install mysql-client && \
+    apt-get update && \
+    apt-get -y --no-install-recommends install mysql-client && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+
     git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
     cd /usr/local/src/drush && \
     git checkout 6.7.0 && \
