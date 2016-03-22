@@ -7,7 +7,6 @@ all: baseimage ubuntu $(IMAGES)
 # Dependencies
 apache-drupal: apache-php
 apache-php: apache
-supervisor-nodejs: supervisor
 
 baseimage:
 	docker pull ubuntu:14.04
