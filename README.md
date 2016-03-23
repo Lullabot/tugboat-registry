@@ -17,7 +17,7 @@ To generate a specific image (along with any of its dependencies)
 The following will start a local Docker repository. This is not necessary for
 creating the images, but is useful for using them on the local network.
 
-    docker run -d -p 5000:5000 -e REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/var/lib/registry -v /var/lib/registry:/var/lib/registry --restart=always --name registry-2.1.1 registry:2.1.1
+    docker run -d -p 5000:5000 -e REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/var/lib/registry -v /var/lib/registry:/var/lib/registry --restart=always --name registry-2.3.1 registry:2.3.1
 
 Then, push each of the newly generated Docker images to the local registry with
 

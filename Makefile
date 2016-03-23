@@ -19,8 +19,7 @@ $(IMAGES): ubuntu
 	docker build -t localhost:5000/$@ $@
 
 push:
-	rm -rf /var/lib/registry/docker
-	for x in `docker images | grep localhost:5000 | awk '{print $$1}'`; do docker push $$x; done
+	for x in `docker images | grep localhost:5000 | grep -v baseimage | awk '{print $$1}'`; do docker push $$x; done
 
 clean:
 	for x in `docker images | grep localhost:5000 | awk '{print $$1}'`; do docker rmi -f $$x; done
