@@ -22,3 +22,5 @@ creating the images, but is useful for using them on the local network.
 Then, push each of the newly generated Docker images to the local registry with
 
     make push
+
+See https://github.com/docker/distribution/releases for the latest version of the registry server
