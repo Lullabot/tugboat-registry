@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -r /etc/default/redis-server ]; then
+    . /etc/default/redis-server
+fi
+
+exec /usr/bin/redis-server /etc/redis/redis.conf
