@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+# Include nginx defaults if available
+if [ -r /etc/default/nginx ]; then
+        . /etc/default/nginx
+fi
+
+exec /usr/sbin/nginx -g "daemon off;"
