@@ -2,7 +2,7 @@ FROM localhost:5000/baseimage
 
 RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-transport-https build-essential curl git vim openssh-client && \
-
+    apt-get -y --no-install-recommends realpath && \
     apt-get -y --no-install-recommends install ssmtp && \
     sed -i s/mailhub=mail/mailhub=172.17.42.1/ /etc/ssmtp/ssmtp.conf && \
     sed -i s/^hostname=/#hostname=/ /etc/ssmtp/ssmtp.conf && \
