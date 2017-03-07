@@ -1,6 +1,7 @@
 FROM localhost:5000/nginx
 RUN mkdir /etc/service/php-fpm \
     && mkdir -p /run/php \
+    && apt-get update \
     && apt-get install -y python-software-properties software-properties-common \
     && LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php \
     && apt-get update \
