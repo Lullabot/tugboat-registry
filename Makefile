@@ -6,15 +6,19 @@ IMAGES = $(shell echo */ | sed 's/\///g' | sed 's/ubuntu//' | sed 's/baseimage//
 all: baseimage ubuntu $(IMAGES)
 
 # Dependencies
-apache-drupal: apache-php
 apache-php: apache
+apache-php-drupal: apache-php
+apache-php7: apache
+apache-php7-drupal: apache-php7
+nginx-php: nginx
+nginx-php7: nginx
 
 baseimage:
 	docker pull ubuntu:14.04
-	docker build -t localhost:5000/baseimage baseimage
+	docker images | grep localhost:5000/baseimage\  || docker build -t localhost:5000/baseimage baseimage
 
 ubuntu:
-	docker images | grep localhost:5000/ubuntu\  || ( @$(MAKE) -f $(THIS_FILE) baseimage && docker build -t localhost:5000/ubuntu ubuntu )
+	docker images | grep localhost:5000/ubuntu\  || ( $(MAKE) -f $(THIS_FILE) baseimage && docker build -t localhost:5000/ubuntu ubuntu )
 
 $(IMAGES): ubuntu
 	docker images | grep localhost:5000/$@\  || docker build -t localhost:5000/$@ $@
