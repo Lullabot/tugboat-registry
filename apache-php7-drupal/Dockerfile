@@ -10,5 +10,5 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
     git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
     cd /usr/local/src/drush && \
-    git checkout 8.1.10 && \
+    git checkout 8.1.15 && \
     ln -s /usr/local/src/drush/drush /usr/bin/drush
