@@ -34,32 +34,8 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
     </main>
-    <div class="container">
-        <h2 class="with-border">Still Have Questions?</h2>
-        <div class="columns">
-            <div class="column-first">
-                <p>
-                    Have a question? Run into a problem? Have no fear, we are here to help! Contact us the way that works best for you:
-                </p>
-            </div>
-            <div class="column-second">
-                <ul class="contact">
-                    <li>
-                        <div class="svg svg--docs"><!--#include virtual="__documentation.svg" --></div>
-                        Check out our <a href="https://docs.tugboat.qa">documentation</a>
-                    </li>
-                    <li>
-                        <div class="svg svg--slack"><!--#include virtual="__slack.svg" --></div>
-                        Join our <a href="https://tugboatqa.slack.com">Slack support channel</a>
-                    </li>
-                    <li>
-                        <div class="svg svg--email"><!--#include virtual="__email.svg" --></div>
-                        Email us at <a href="mailto:support@tugboat.qa">support@tugboat.qa</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+    <!--#include virtual="_questions.shtml" -->
 </div>
 </body>
 </html>

@@ -19,29 +19,30 @@
     <main class="main">
 
         <div>
-            <h2>Is your project in a /docroot folder?</h2>
+            <h2>Can Tugboat find your document root?</h2>
             <p>
-                Tugboat looks for a folder named "docroot" in your repository to serve content from. This is a common
-                standard, but many projects have their own preferences. If your content root is in a different location
-                you have a couple of different options.
+                Tugboat looks for a folder named <tt>docroot</tt> in your repository to serve content from. This is a
+                common pattern, but many projects have their own preference. If your document root is in a different
+                location you have a couple of different options.
             </p>
             <ul>
                 <li>
-                    Move your content to /docroot in your repository. This is the most straightforward fix for Tugboat,
-                    but can be problematic if your repository has already been deployed elsewhere. If you choose this
-                    option, be sure to follow up on other deployments to make sure things still work.
+                    <strong>Move your content to /docroot in your repository.</strong> This is the most straightforward
+                    fix for Tugboat, but can be problematic if your repository has already been deployed elsewhere. If
+                    you choose this option, be sure to follow up on other deployments to make sure things still work.
                 </li>
                 <li>
-                    Create a build script. Build scripts can be used to perform any number of customizations to your
-                    preview. But, if all you need is to point apache to a different location in your repository, a
-                    simple script like the following may be all you need. Add this to a file named <tt>Makefile</tt>
-                    in the root of your repository. Make sure the indent is a TAB, and not multiple spaces.
+                    <strong>Create a build script.</strong> Build scripts can be used to perform any number of
+                    customizations to your preview. But, if all you need is to point apache to a different location in
+                    your repository, a simple script like the following may be all you need. Add this to a file named
+                    <tt>Makefile</tt> in the root of your repository. Make sure the indent is a TAB, and not multiple
+                    spaces.
                 </li>
             </ul>
 
 <pre class="code">
 <code>tugboat-init:</code>
-<code>  ln -sf $TUGBOAT_ROOT/public_html /var/www/html</code>
+<code>        ln -sf $TUGBOAT_ROOT/public_html /var/www/html</code>
 </pre>
 
             <p>
@@ -72,33 +73,7 @@
 
     </main>
 
-    <div>
-        <h2 class="with-border">Still Have Questions?</h2>
-        <div class="columns">
-            <div class="column-first">
-                <p>
-                    Have a question? Run into a problem? Have no fear, we are here to help! Contact us however works
-                    best for you
-                </p>
-            </div>
-            <div class="column-second">
-                <ul class="contact">
-                    <li>
-                        <div class="svg svg--docs"><!--#include virtual="_documentation.svg" --></div>
-                        Check out our <a href="https://docs2.tugboat.qa">documentation</a>
-                    </li>
-                    <li>
-                        <div class="svg svg--slack"><!--#include virtual="_slack.svg" --></div>
-                        Join our <a href="https://tugboatqa.slack.com">Slack support channel</a>
-                    </li>
-                    <li>
-                        <div class="svg svg--email"><!--#include virtual="_email.svg" --></div>
-                        Email us at <a href="mailto:support@tugboat.qa">support@tugboat.qa</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <!--#include virtual="_questions.shtml" -->
 </div>
 </body>
 </html>
