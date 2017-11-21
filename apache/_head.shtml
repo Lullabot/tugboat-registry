@@ -24,19 +24,19 @@
 <style type="text/css">
     @font-face {
         font-family: 'FreightSansPro';
-        src: url(data:application/x-font-opentype;base64,<!--#include virtual="FreightSansProBook.base64" -->) format('opentype');
+        src: url(data:application/x-font-opentype;base64,<!--#include virtual="_FreightSansProBook.base64" -->) format('opentype');
         font-weight: normal;
         font-style: normal;
     }
     @font-face {
         font-family: 'FreightSansPro';
-        src: url(data:application/x-font-opentype;base64,<!--#include virtual="FreightSansProMedium.base64" -->)  format('opentype');
+        src: url(data:application/x-font-opentype;base64,<!--#include virtual="_FreightSansProMedium.base64" -->)  format('opentype');
         font-weight: 500;
         font-style: normal;
     }
     @font-face {
         font-family: 'FreightSansPro';
-        src: url(data:application/x-font-opentype;base64,<!--#include virtual="FreightSansProBold.base64" -->) format('opentype');
+        src: url(data:application/x-font-opentype;base64,<!--#include virtual="_FreightSansProBold.base64" -->) format('opentype');
         font-weight: 700;
         font-style: normal;
     }
