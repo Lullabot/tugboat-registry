@@ -1,11 +1,11 @@
 <html lang="en">
-<head><!--#include virtual="__head.shtml" --></head>
+<head><!--#include virtual="_head.shtml" --></head>
 <body>
 <div class="page container">
     <div>
         <div class="top">
             <div class="page-title">
-                <div class="svg svg--top"><!--#include virtual="__checkmark.svg" --></div>
+                <div class="svg svg--top"><!--#include virtual="_checkmark.svg" --></div>
                 <h1>
                     Your Preview is Almost Ready
                 </h1>
@@ -62,7 +62,7 @@
             </p>
             <p>
                 <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
-                Remember to rebuild the <a href="https://<!--#echo var="dashboard" -->">preview</a> after you make any
+                Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> after you make any
                 changes to your build script. This will happen automatically for previews built for pull requests (or
                 merge requests), but needs to be done manually for other previews.
             </p>
@@ -82,15 +82,15 @@
             <div class="column-second">
                 <ul class="contact">
                     <li>
-                        <div class="svg svg--docs"><!--#include virtual="__documentation.svg" --></div>
+                        <div class="svg svg--docs"><!--#include virtual="_documentation.svg" --></div>
                         Check out our <a href="https://docs2.tugboat.qa">documentation</a>
                     </li>
                     <li>
-                        <div class="svg svg--slack"><!--#include virtual="__slack.svg" --></div>
+                        <div class="svg svg--slack"><!--#include virtual="_slack.svg" --></div>
                         Join our <a href="https://tugboatqa.slack.com">Slack support channel</a>
                     </li>
                     <li>
-                        <div class="svg svg--email"><!--#include virtual="__email.svg" --></div>
+                        <div class="svg svg--email"><!--#include virtual="_email.svg" --></div>
                         Email us at <a href="mailto:support@tugboat.qa">support@tugboat.qa</a>
                     </li>
                 </ul>
