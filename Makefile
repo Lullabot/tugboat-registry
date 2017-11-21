@@ -30,4 +30,4 @@ clean:
 	for x in `docker images | grep localhost:5000 | awk '{print $$1}'`; do docker rmi -f $$x; done
 
 tugboat-init:
-	ln -sf apache /var/www/html
+	ln -sf /var/lib/tugboat/apache /var/www/html
