@@ -31,3 +31,4 @@ clean:
 
 tugboat-init:
 	ln -sf /var/lib/tugboat/apache /var/www/html
+	rm -rf /var/www/__tugboat
