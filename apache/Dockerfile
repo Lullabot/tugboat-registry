@@ -22,13 +22,16 @@ COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.c
 COPY .htaccess /var/www/__tugboat/.htaccess
 COPY noindex.shtml /var/www/__tugboat/noindex.shtml
 COPY noservice.shtml /var/www/__tugboat/noservice.shtml
+COPY _checkmark.svg /var/www/__tugboat/_checkmark.svg
+COPY _docroot.svg /var/www/__tugboat/_docroot.svg
+COPY _documentation.svg /var/www/__tugboat/_documentation.svg
+COPY _email.svg /var/www/__tugboat/_email.svg
 COPY _FreightSansProBold.base64 /var/www/__tugboat/_FreightSansProBold.base64
 COPY _FreightSansProBook.base64 /var/www/__tugboat/_FreightSansProBook.base64
 COPY _FreightSansProMedium.base64 /var/www/__tugboat/_FreightSansProMedium.base64
 COPY _head.shtml /var/www/__tugboat/_head.shtml
-COPY _checkmark.svg /var/www/__tugboat/_checkmark.svg
-COPY _documentation.svg /var/www/__tugboat/_documentation.svg
-COPY _email.svg /var/www/__tugboat/_email.svg
+COPY _makefile.shtml /var/www/__tugboat/_makefile.shtml
+COPY _questions.shtml /var/www/__tugboat/_questions.shtml
 COPY _slack.svg /var/www/__tugboat/_slack.svg
 
 LABEL tugboat.ready="curl -I http://127.0.0.1"
