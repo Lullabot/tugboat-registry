@@ -1,8 +1,8 @@
 <html lang="en">
 <head><!--#include virtual="__head.shtml" --></head>
 <body>
-<div class="page">
-    <div class="container">
+<div class="page container">
+    <div>
         <div class="top">
             <div class="page-title">
                 <div class="svg svg--top"><!--#include virtual="__checkmark.svg" --></div>
@@ -11,42 +11,79 @@
                 </h1>
             </div>
             <p class="intro">
-                Tugboat has successfully cloned your git repository, but we need a bit more information in
-                order to display your previews. Run through the following checklist below and you willll be
-                on your way!
+                Tugboat has successfully cloned your git repository, but we need a bit more information in order to
+                display your previews. Run through the following checklist below and you willll be on your way!
             </p>
         </div>
     </div>
     <main class="main">
-        <div class="container">
+
+        <div>
             <h2>Is your project in a /docroot folder?</h2>
-            <p>Your web server, Apache, is looking for your project in /docroot. If you don’t have a docroot folder in your repository, either change your project folder structure or create a Makefile build script to specify the default folder for the web server (e.g. public_html):</p>
-        </div>
-        <div class="container container--wide">
+            <p>
+                Tugboat looks for a folder named "docroot" in your repository to serve content from. This is a common
+                standard, but many projects have their own preferences. If your content root is in a different location
+                you have a couple of different options.
+            </p>
+            <ul>
+                <li>
+                    Move your content to /docroot in your repository. This is the most straightforward fix for Tugboat,
+                    but can be problematic if your repository has already been deployed elsewhere. If you choose this
+                    option, be sure to follow up on other deployments to make sure things still work.
+                </li>
+                <li>
+                    Create a build script. Build scripts can be used to perform any number of customizations to your
+                    preview. But, if all you need is to point apache to a different location in your repository, a
+                    simple script like the following may be all you need. Add this to a file named <tt>Makefile</tt>
+                    in the root of your repository. Make sure the indent is a TAB, and not multiple spaces.
+
 <pre class="code">
 <code>tugboat-init:</code>
-<code>  ln -s public_html docroot</code>
+<code>  ln -sf $TUGBOAT_ROOT/public_html /var/www/html</code>
 </pre>
+
+                    Read below for more information on build scripts.
+                </li>
+            </ul>
         </div>
-        <div class="container">
-            <p>Remember to rebuild preview after you create the makefile. Any time you create a pull request preview, it’s updated automatically; branches and tags need to be updated manually to see changes.</p>
-            <h2>Do you need a Makefile?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        <div>
+            <h2>Do you need a build script?</h2>
+            <p>
+                It is very likely that your repository will need a build script in order to work correctly with
+                Tugboat. The fact that you are seeing this page indicates that a build script is probably your next
+                step.
+            </p>
+            <p>
+                Tugboat uses <a href="https://www.gnu.org/software/make/">GNU Make</a> to provide the opportunity to
+                run your own scripts at different points of a preview's life cycle. Check out our
+                <a href="https://docs2.tugboat.qa">documentation</a> for details on how to create a Tugboat build
+                script.
+            </p>
+            <p>
+                <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
+                Remember to rebuild the <a href="https://<!--#echo var="dashboard" -->">preview</a> after you make any
+                changes to your build script. This will happen automatically for previews built for pull requests (or
+                merge requests), but needs to be done manually for other previews.
+            </p>
         </div>
+
     </main>
-    <div class="container">
+
+    <div>
         <h2 class="with-border">Still Have Questions?</h2>
         <div class="columns">
             <div class="column-first">
                 <p>
-                    Have a question? Run into a problem? Have no fear, we are here to help! Contact us the way that works best for you:
+                    Have a question? Run into a problem? Have no fear, we are here to help! Contact us however works
+                    best for you
                 </p>
             </div>
             <div class="column-second">
                 <ul class="contact">
                     <li>
                         <div class="svg svg--docs"><!--#include virtual="__documentation.svg" --></div>
-                        Check out our <a href="https://docs.tugboat.qa">documentation</a>
+                        Check out our <a href="https://docs2.tugboat.qa">documentation</a>
                     </li>
                     <li>
                         <div class="svg svg--slack"><!--#include virtual="__slack.svg" --></div>
