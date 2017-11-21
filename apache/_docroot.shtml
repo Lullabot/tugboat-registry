@@ -1,0 +1,31 @@
+<div>
+    <h2>Can Tugboat find your document root?</h2>
+    <p>
+        Tugboat looks for a folder named <tt>docroot</tt> in your repository to serve content from. This is a
+        common pattern, but many projects have their own preference. If your document root is in a different
+        location you have a couple of different options.
+    </p>
+    <ul>
+        <li>
+            <strong>Move your content to /docroot in your repository.</strong> This is the most straightforward
+            fix for Tugboat, but can be problematic if your repository has already been deployed elsewhere. If
+            you choose this option, be sure to follow up on other deployments to make sure things still work.
+        </li>
+        <li>
+            <strong>Create a build script.</strong> Build scripts can be used to perform any number of
+            customizations to your preview. But, if all you need is to point apache to a different location in
+            your repository, a simple script like the following may be all you need. Add this to a file named
+            <tt>Makefile</tt> in the root of your repository. Make sure the indent is a TAB, and not multiple
+            spaces.
+        </li>
+    </ul>
+
+<pre class="code">
+<code>tugboat-init:</code>
+<code>        ln -sf $TUGBOAT_ROOT/public_html /var/www/html</code>
+</pre>
+
+    <p>
+        Read below for more information on build scripts.
+    </p>
+</div>

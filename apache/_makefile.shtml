@@ -1,0 +1,20 @@
+<div>
+    <h2>Do you need a build script?</h2>
+    <p>
+        It is very likely that your repository will need a build script in order to work correctly with
+        Tugboat. The fact that you are seeing this page indicates that a build script is probably your next
+        step.
+    </p>
+    <p>
+        Tugboat uses <a href="https://www.gnu.org/software/make/">GNU Make</a> to provide the opportunity to
+        run your own scripts at different points of a preview's life cycle. Check out our
+        <a href="https://docs2.tugboat.qa">documentation</a> for details on how to create a Tugboat build
+        script.
+    </p>
+    <p>
+        <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
+        Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> after you make any
+        changes to your build script. This will happen automatically for previews built for pull requests (or
+        merge requests), but needs to be done manually for other previews.
+    </p>
+</div>
