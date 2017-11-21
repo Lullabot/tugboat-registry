@@ -25,5 +25,9 @@ COPY FreightSansProBook.base64 /var/www/__tugboat/FreightSansProBook.base64
 COPY FreightSansProMedium.base64 /var/www/__tugboat/FreightSansProMedium.base64
 COPY noindex.shtml /var/www/__tugboat/noindex.shtml
 COPY noservice.shtml /var/www/__tugboat/noservice.shtml
+COPY checkmark.svg /var/www/__tugboat/checkmark.svg
+COPY documentation.svg /var/www/__tugboat/documentation.svg
+COPY email.svg /var/www/__tugboat/email.svg
+COPY slack.svg /var/www/__tugboat/slack.svg
 
 LABEL tugboat.ready="curl -I http://127.0.0.1"
