@@ -1,11 +1,11 @@
 <html lang="en">
-<head><!--#include virtual="__head.shtml" --></head>
+<head><!--#include virtual="_head.shtml" --></head>
 <body>
 <div class="page container">
     <div>
         <div class="top">
             <div class="page-title">
-                <div class="svg svg--top"><!--#include virtual="__checkmark.svg" --></div>
+                <div class="svg svg--top"><!--#include virtual="_checkmark.svg" --></div>
                 <h1>
                     Your Preview is Almost Ready
                 </h1>
