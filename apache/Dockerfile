@@ -19,7 +19,7 @@ COPY access-forwarder.runit /etc/service/apache2-access-forwarder/run
 COPY error-forwarder.runit /etc/service/apache2-error-forwarder/run
 COPY conf-available/security.conf /etc/apache2/conf-available/security.conf
 COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY noindex.html /var/www/__tugboat/noindex.html
-COPY noservice.html /var/www/__tugboat/noservice.html
+COPY noindex.shtml /var/www/__tugboat/noindex.shtml
+COPY noservice.shtml /var/www/__tugboat/noservice.shtml
 
 LABEL tugboat.ready="curl -I http://127.0.0.1"
