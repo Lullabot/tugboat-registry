@@ -1,344 +1,66 @@
 <html lang="en">
-        <head>
-            <meta charset="utf-8">
-            <title>Welcome to Tugboat!</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="apple-touch-icon" sizes="57x57" href="https://tugboat.qa/favicon/apple-touch-icon-57x57.png">
-            <link rel="apple-touch-icon" sizes="60x60" href="https://tugboat.qa/favicon/apple-touch-icon-60x60.png">
-            <link rel="apple-touch-icon" sizes="72x72" href="https://tugboat.qa/favicon/apple-touch-icon-72x72.png">
-            <link rel="apple-touch-icon" sizes="76x76" href="https://tugboat.qa/favicon/apple-touch-icon-76x76.png">
-            <link rel="apple-touch-icon" sizes="114x114" href="https://tugboat.qa/favicon/apple-touch-icon-114x114.png">
-            <link rel="apple-touch-icon" sizes="120x120" href="https://tugboat.qa/favicon/apple-touch-icon-120x120.png">
-            <link rel="apple-touch-icon" sizes="144x144" href="https://tugboat.qa/favicon/apple-touch-icon-144x144.png">
-            <link rel="apple-touch-icon" sizes="152x152" href="https://tugboat.qa/favicon/apple-touch-icon-152x152.png">
-            <link rel="apple-touch-icon" sizes="180x180" href="https://tugboat.qa/favicon/apple-touch-icon-180x180.png">
-            <link rel="icon" type="image/png" href="https://tugboat.qa/favicon/favicon-32x32.png" sizes="32x32">
-            <link rel="icon" type="image/png" href="https://tugboat.qa/favicon/android-chrome-192x192.png" sizes="192x192">
-            <link rel="icon" type="image/png" href="https://tugboat.qa/favicon/favicon-96x96.png" sizes="96x96">
-            <link rel="icon" type="image/png" href="https://tugboat.qa/favicon/favicon-16x16.png" sizes="16x16">
-            <link rel="manifest" href="https://tugboat.qa/favicon/manifest.json">
-            <link rel="mask-icon" href="https://tugboat.qa/favicon/safari-pinned-tab.svg" color="#5bbad5">
-            <link rel="shortcut icon" href="https://tugboat.qa/favicon/favicon.ico">
-            <meta name="msapplication-TileColor" content="#da532c">
-            <meta name="msapplication-TileImage" content="https://tugboat.qa/favicon/mstile-144x144.png">
-            <meta name="msapplication-config" content="https://tugboat.qa/favicon/browserconfig.xml">
-            <meta name="theme-color" content="#ffffff">
-            <style type="text/css">
-                @font-face {
-                    font-family: 'FreightSansPro';
-                    src: url(data:application/x-font-opentype;base64,<!--#include virtual="FreightSansProBook.base64" -->) format('opentype');
-                    font-weight: normal;
-                    font-style: normal;
-                }
-                @font-face {
-                    font-family: 'FreightSansPro';
-                    src: url(data:application/x-font-opentype;base64,<!--#include virtual="FreightSansProMedium.base64" -->)  format('opentype');
-                    font-weight: 500;
-                    font-style: normal;
-                }
-                @font-face {
-                    font-family: 'FreightSansPro';
-                    src: url(data:application/x-font-opentype;base64,<!--#include virtual="FreightSansProBold.base64" -->) format('opentype');
-                    font-weight: 700;
-                    font-style: normal;
-                }
-    
-                html * {
-                    box-sizing: border-box;
-                }
-    
-                html {
-                    font-family: "FreightSansPro", sans-serif;
-                    color: #55636F;
-                }
-    
-                body {
-                    margin: 0;
-                    padding: 0;
-                }
-    
-                a {
-                    color: #2991f3;
-                    text-decoration: none;
-                }
-    
-                a:focus,
-                a:hover {
-                    color: #0b6bc4;
-                    text-decoration: none;
-                }
-    
-                .page {
-                    margin: 50px 0;
-                }
-    
-                @media (min-width: 566px) {
-                    .page {
-                        margin: 110px 0;
-                    }
-                }
-    
-                .container {
-                    max-width: 566px; /* 15 + 536 + 15 */
-                    margin: 0 auto;
-                    padding: 0 15px;
-                }
-    
-                .container--wide {
-                    max-width: 800px; /* 15 + 770 + 15 */
-                }
-    
-                .top {
-                    margin-bottom: 50px;
-                }
-    
-                .intro {
-                    margin: 0 0 50px 0;
-                    font-size: 18px;
-                    font-weight: 500;
-                    line-height: 30px;
-                }
-    
-                @media (min-width: 566px) {
-                    .intro {
-                        margin-bottom: 70px;
-                        font-size: 19px;
-                        line-height: 32px;
-                    }
-                }
-    
-                .main {
-                    display: inline-block;
-                    width: 100%;
-                    margin-bottom: 30px;
-                }
-    
-                p {
-                    margin-bottom: 50px;
-                    font-size: 16px;
-                    line-height: 28px;
-                    font-weight: normal;
-                    color: #21323f;
-                }
-    
-                .svg {
-                    position: relative;
-                    display: inline-block;
-                    margin-right: 10px;
-                }
-    
-                .svg--top {
-                    top: 6px;
-                    vertical-align: top;
-                }
-    
-                @media (min-width: 566px) {
-                    .svg--top {
-                        top: 20px;
-                    }
-                }
-    
-                .svg--docs {
-                    top: 2px;
-                }
-    
-                .svg--slack {
-                    top: 3px;
-                }
-    
-                .svg--email {
-                    top: 1px;
-                }
-    
-                .page-title {
-                    white-space: nowrap;
-                }
-    
-                h1 {
-                    position: relative;
-                    left: -50px;
-                    display: inline-block;
-                    margin: 0 0 15px 50px;
-                    color: #3eb27a;
-                    font-size: 32px;
-                    font-weight: bold;
-                    line-height: 48px;
-                    white-space: normal;
-                }
-    
-                @media (min-width: 566px) {
-                    h1 {
-                        font-size: 36px;
-                        font-weight: bold;
-                        line-height: 72px;
-                    }
-                }
-    
-                h2 {
-                    color: #0B1B23;
-                    font-size: 20px;
-                    font-weight: bold;
-                    line-height: 24px;
-                }
-    
-                h2.with-border {
-                    padding-bottom: 20px;
-                    margin-bottom: 30px;
-                    border-bottom: 3px solid #f9fbfa;
-                }
-    
-                pre.code {
-                    display: inline-block;
-                    width: calc(100% - 20px);
-                    padding: 5px 15px;
-                    margin-left: 20px;
-                    margin-bottom: 40px;
-                    background: #f7f9fa;
-                    border: 1px solid #eeeff1;
-                    counter-reset: line;
-                }
-    
-                pre.code code {
-                    float: left;
-                    width: 100%;
-                    margin-bottom: 5px;
-                    font-size: 15px;
-                    counter-increment: line;
-                }
-    
-                pre.code code:last-child {
-                    margin-bottom: 0;
-                }
-    
-                pre.code code:before {
-                    content: counter(line);
-                    position: relative;
-                    left: -30px;
-                    font-size: 14px;
-                    color: #e0e0e0;
-                    -webkit-user-select: none;
-                }
-    
-                .columns {
-                    display: inline-block;
-                    width: 100%;
-                }
-    
-                .column-first {
-                    display: inline-block;
-                    width: 100%;
-                    margin-bottom: 20px;
-                }
-    
-                .column-first p {
-                    margin: 0 0 10px 0;
-                    color: #55636F;
-                    font-size: 16px;
-                    font-weight: normal;
-                    line-height: 33px;
-                }
-    
-                .column-second {
-                    display: inline-block;
-                    width: 100%;
-                    margin-bottom: 20px;
-                }
-    
-                @media (min-width: 566px) {
-                    .column-first {
-                        float: left;
-                        width: 50%;
-                        padding-right: 10px;
-                    }
-    
-                    .column-second {
-                        float: left;
-                        width: 50%;
-                        padding-left: 10px;
-                    }
-                }
-    
-                ul.contact {
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                }
-    
-                ul.contact li {
-                    color: #21323F;
-                    font-size: 16px;
-                    font-weight: normal;
-                    line-height: 33px;
-                }
-    
-                ul.contact .svg {
-                    position: relative;
-                    display: inline-block;
-                    margin: 0 10px 0 0;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="page">
-                <div class="container">
-                    <div class="top">
-                        <div class="page-title">
-                            <div class="svg svg--top"><!--#include virtual="checkmark.svg" --></div>
-                            <h1>
-                                Your Preview is Almost Ready
-                            </h1>
-                        </div>
-                        <p class="intro">
-                            Tugboat has successfully cloned your git repository, but we need a bit more information in
-                            order to display your previews. Run through the following checklist below and you willll be
-                            on your way!
-                        </p>
-                    </div>
-                </div>
-                <main class="main">
-                    <div class="container">
-                        <h2>Is your project in a /docroot folder?</h2>
-                        <p>Your web server, Apache, is looking for your project in /docroot. If you don’t have a docroot folder in your repository, either change your project folder structure or create a Makefile build script to specify the default folder for the web server (e.g. public_html):</p>
-                    </div>
-                    <div class="container container--wide">
+<head><!--#include virtual="head.shtml" --></head>
+<body>
+<div class="page">
+    <div class="container">
+        <div class="top">
+            <div class="page-title">
+                <div class="svg svg--top"><!--#include virtual="checkmark.svg" --></div>
+                <h1>
+                    Your Preview is Almost Ready
+                </h1>
+            </div>
+            <p class="intro">
+                Tugboat has successfully cloned your git repository, but we need a bit more information in
+                order to display your previews. Run through the following checklist below and you willll be
+                on your way!
+            </p>
+        </div>
+    </div>
+    <main class="main">
+        <div class="container">
+            <h2>Is your project in a /docroot folder?</h2>
+            <p>Your web server, Apache, is looking for your project in /docroot. If you don’t have a docroot folder in your repository, either change your project folder structure or create a Makefile build script to specify the default folder for the web server (e.g. public_html):</p>
+        </div>
+        <div class="container container--wide">
 <pre class="code">
 <code>tugboat-init:</code>
 <code>  ln -s public_html docroot</code>
 </pre>
-                    </div>
-                    <div class="container">
-                        <p>Remember to rebuild preview after you create the makefile. Any time you create a pull request preview, it’s updated automatically; branches and tags need to be updated manually to see changes.</p>
-                        <h2>Do you need a Makefile?</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                </main>
-                <div class="container">
-                    <h2 class="with-border">Still Have Questions?</h2>
-                    <div class="columns">
-                        <div class="column-first">
-                            <p>
-                                Have a question? Run into a problem? Have no fear, we are here to help! Contact us the way that works best for you:
-                            </p>
-                        </div>
-                        <div class="column-second">
-                            <ul class="contact">
-                                <li>
-                                    <div class="svg svg--docs"><!--#include virtual="documentation.svg" --></div>
-                                    Check out our <a href="https://docs.tugboat.qa">documentation</a>
-                                </li>
-                                <li>
-                                    <div class="svg svg--slack"><!--#include virtual="slack.svg" --></div>
-                                    Join our <a href="https://tugboatqa.slack.com">Slack support channel</a>
-                                </li>
-                                <li>
-                                    <div class="svg svg--email"><!--#include virtual="email.svg" --></div>
-                                    Email us at <a href="mailto:support@tugboat.qa">support@tugboat.qa</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="container">
+            <p>Remember to rebuild preview after you create the makefile. Any time you create a pull request preview, it’s updated automatically; branches and tags need to be updated manually to see changes.</p>
+            <h2>Do you need a Makefile?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+    </main>
+    <div class="container">
+        <h2 class="with-border">Still Have Questions?</h2>
+        <div class="columns">
+            <div class="column-first">
+                <p>
+                    Have a question? Run into a problem? Have no fear, we are here to help! Contact us the way that works best for you:
+                </p>
             </div>
-        </body>
-    </html>
+            <div class="column-second">
+                <ul class="contact">
+                    <li>
+                        <div class="svg svg--docs"><!--#include virtual="documentation.svg" --></div>
+                        Check out our <a href="https://docs.tugboat.qa">documentation</a>
+                    </li>
+                    <li>
+                        <div class="svg svg--slack"><!--#include virtual="slack.svg" --></div>
+                        Join our <a href="https://tugboatqa.slack.com">Slack support channel</a>
+                    </li>
+                    <li>
+                        <div class="svg svg--email"><!--#include virtual="email.svg" --></div>
+                        Email us at <a href="mailto:support@tugboat.qa">support@tugboat.qa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
     
