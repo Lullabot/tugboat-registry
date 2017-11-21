@@ -36,15 +36,17 @@
                     preview. But, if all you need is to point apache to a different location in your repository, a
                     simple script like the following may be all you need. Add this to a file named <tt>Makefile</tt>
                     in the root of your repository. Make sure the indent is a TAB, and not multiple spaces.
+                </li>
+            </ul>
 
 <pre class="code">
 <code>tugboat-init:</code>
 <code>  ln -sf $TUGBOAT_ROOT/public_html /var/www/html</code>
 </pre>
 
-                    Read below for more information on build scripts.
-                </li>
-            </ul>
+            <p>
+                Read below for more information on build scripts.
+            </p>
         </div>
 
         <div>
