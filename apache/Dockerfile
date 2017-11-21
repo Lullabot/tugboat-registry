@@ -19,6 +19,10 @@ COPY access-forwarder.runit /etc/service/apache2-access-forwarder/run
 COPY error-forwarder.runit /etc/service/apache2-error-forwarder/run
 COPY conf-available/security.conf /etc/apache2/conf-available/security.conf
 COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY .htaccess /var/www/__tugboat/.htaccess
+COPY FreightSansProBold.base64 /var/www/__tugboat/FreightSansProBold.base64
+COPY FreightSansProBook.base64 /var/www/__tugboat/FreightSansProBook.base64
+COPY FreightSansProMedium.base64 /var/www/__tugboat/FreightSansProMedium.base64
 COPY noindex.shtml /var/www/__tugboat/noindex.shtml
 COPY noservice.shtml /var/www/__tugboat/noservice.shtml
 
