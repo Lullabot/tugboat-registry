@@ -19,19 +19,20 @@ COPY access-forwarder.runit /etc/service/apache2-access-forwarder/run
 COPY error-forwarder.runit /etc/service/apache2-error-forwarder/run
 COPY conf-available/security.conf /etc/apache2/conf-available/security.conf
 COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY .htaccess /var/www/__tugboat/.htaccess
-COPY noindex.shtml /var/www/__tugboat/noindex.shtml
-COPY noservice.shtml /var/www/__tugboat/noservice.shtml
-COPY _checkmark.svg /var/www/__tugboat/_checkmark.svg
-COPY _docroot.svg /var/www/__tugboat/_docroot.svg
-COPY _documentation.svg /var/www/__tugboat/_documentation.svg
-COPY _email.svg /var/www/__tugboat/_email.svg
-COPY _FreightSansProBold.base64 /var/www/__tugboat/_FreightSansProBold.base64
-COPY _FreightSansProBook.base64 /var/www/__tugboat/_FreightSansProBook.base64
-COPY _FreightSansProMedium.base64 /var/www/__tugboat/_FreightSansProMedium.base64
-COPY _head.shtml /var/www/__tugboat/_head.shtml
-COPY _makefile.shtml /var/www/__tugboat/_makefile.shtml
-COPY _questions.shtml /var/www/__tugboat/_questions.shtml
-COPY _slack.svg /var/www/__tugboat/_slack.svg
+COPY .htaccess \
+     noindex.shtml \
+     noservice.shtml \
+     _checkmark.svg \
+     _docroot.shtml \
+     _documentation.svg \
+     _email.svg \
+     _FreightSansProBold.base64 \
+     _FreightSansProBook.base64 \
+     _FreightSansProMedium.base64 \
+     _head.shtml \
+     _makefile.shtml \
+     _questions.shtml \
+     _slack.svg \
+     /var/www/__tugboat/
 
 LABEL tugboat.ready="curl -I http://127.0.0.1"
