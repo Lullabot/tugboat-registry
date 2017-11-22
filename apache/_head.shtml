@@ -67,23 +67,15 @@
     }
 
     .page {
-        margin: 50px 0;
+        max-width: 566px; /* 15 + 536 + 15 */
+        margin: 50px auto;
+        padding: 0 15px;
     }
 
     @media (min-width: 566px) {
         .page {
-            margin: 110px 0;
+            margin: 110px auto;
         }
-    }
-
-    .container {
-        max-width: 566px; /* 15 + 536 + 15 */
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-
-    .container--wide {
-        max-width: 800px; /* 15 + 770 + 15 */
     }
 
     .top {
@@ -112,7 +104,8 @@
     }
 
     p {
-        margin-bottom: 50px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         font-size: 16px;
         line-height: 28px;
         font-weight: normal;
@@ -185,36 +178,61 @@
         border-bottom: 3px solid #f9fbfa;
     }
 
-    pre.code {
-        display: inline-block;
-        width: calc(100% - 20px);
-        padding: 5px 15px;
-        margin-left: 20px;
-        margin-bottom: 40px;
-        background: #f7f9fa;
-        border: 1px solid #eeeff1;
-        counter-reset: line;
+    h3 {
+        color: #0B1B23;
+        font-size: 17px;
+        font-weight: bold;
+        line-height: 24px;
     }
 
-    pre.code code {
-        float: left;
+    .section {
+        display: inline-block;
         width: 100%;
-        margin-bottom: 5px;
-        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .code {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .code__counters {
+        float: left;
+        width: 20px;
+        padding: 5px 0;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        counter-reset: line;
+        pointer-events: none;
+    }
+
+    .code__counters span {
         counter-increment: line;
     }
 
-    pre.code code:last-child {
-        margin-bottom: 0;
+    .code__counters span:before {
+        content: counter(line);
+        float: left;
+        width: 20px;
+        font-family: monospace;
+        font-size: 14px;
+        line-height: 20px;
+        color: #e0e0e0;
     }
 
-    pre.code code:before {
-        content: counter(line);
-        position: relative;
-        left: -30px;
+    .code__pre {
+        display: inline-block;
+        width: calc(100% - 20px);
+        padding: 5px 15px;
+        margin: 0;
         font-size: 14px;
-        color: #e0e0e0;
-        -webkit-user-select: none;
+        line-height: 20px;
+        background: #f7f9fa;
+        border: 1px solid #eeeff1;
+        overflow-x: auto;
     }
 
     .columns {

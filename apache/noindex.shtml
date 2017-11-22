@@ -1,28 +1,25 @@
 <html lang="en">
-<head><!--#include virtual="_head.shtml" --></head>
-<body>
-<div class="page container">
-    <div>
-        <div class="top">
-            <div class="page-title">
-                <div class="svg svg--top"><!--#include virtual="_checkmark.svg" --></div>
-                <h1>
-                    Your Preview is Almost Ready
-                </h1>
+    <head><!--#include virtual="_head.shtml" --></head>
+    <body>
+        <div class="page">
+            <div class="top">
+                <div class="page-title">
+                    <div class="svg svg--top"><!--#include virtual="_checkmark.svg" --></div>
+                    <h1>
+                        Your Preview is Almost Ready
+                    </h1>
+                </div>
+                <p class="intro">
+                    Tugboat has successfully cloned your git repository, but we need a bit more information in order to
+                    display your previews. Run through the following checklist and you will be on your way!
+                </p>
             </div>
-            <p class="intro">
-                Tugboat has successfully cloned your git repository, but we need a bit more information in order to
-                display your previews. Run through the following checklist and you will be on your way!
-            </p>
+            <main class="main">
+                <!--#include virtual="_docroot.shtml" -->
+                <!--#include virtual="_makefile.shtml" -->
+            </main>
+            <!--#include virtual="_questions.shtml" -->
         </div>
-    </div>
-    <main class="main">
-        <!--#include virtual="_docroot.shtml" -->
-        <!--#include virtual="_makefile.shtml" -->
-    </main>
-
-    <!--#include virtual="_questions.shtml" -->
-</div>
-</body>
+    </body>
 </html>
     

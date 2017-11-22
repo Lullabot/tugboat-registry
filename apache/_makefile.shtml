@@ -1,4 +1,4 @@
-<div>
+<div class="section">
     <h2>Do you need a build script?</h2>
     <p>
         It is very likely that your repository will need a build script in order to work correctly with
