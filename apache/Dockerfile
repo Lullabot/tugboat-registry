@@ -8,7 +8,7 @@ RUN mkdir /etc/service/apache2 && \
     apt-get -y --no-install-recommends install apache2 apache2-utils && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 
-    a2enmod expires rewrite && \
+    a2enmod expires rewrite include && \
     rm -rf /var/www/html && \
     ln -s /var/lib/tugboat/docroot /var/www/html && \
     mkdir /var/www/__tugboat && \
