@@ -1,0 +1,27 @@
+<div>
+    <h2 class="with-border">Still Have Questions?</h2>
+    <div class="columns">
+        <div class="column-first">
+            <p>
+                Have a question? Run into a problem? Have no fear, we are here to help! Contact us however works best
+                for you
+            </p>
+        </div>
+        <div class="column-second">
+            <ul class="contact">
+                <li>
+                    <div class="svg svg--docs"><!--#include file="_documentation.svg" --></div>
+                    Check out our <a href="https://docs2.tugboat.qa">documentation</a>
+                </li>
+                <li>
+                    <div class="svg svg--slack"><!--#include file="_slack.svg" --></div>
+                    Join our <a href="https://tugboatqa.slack.com">Slack support channel</a>
+                </li>
+                <li>
+                    <div class="svg svg--email"><!--#include file="_email.svg" --></div>
+                    Email us at <a href="mailto:support@tugboat.qa">support@tugboat.qa</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

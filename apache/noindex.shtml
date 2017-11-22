@@ -1,0 +1,25 @@
+<html lang="en">
+    <head><!--#include file="_head.shtml" --></head>
+    <body>
+        <div class="page">
+            <div class="top">
+                <div class="page-title">
+                    <div class="svg svg--top"><!--#include file="_checkmark.svg" --></div>
+                    <h1>
+                        Your Preview is Almost Ready
+                    </h1>
+                </div>
+                <p class="intro">
+                    Tugboat has successfully cloned your git repository, but we need a bit more information in order to
+                    display your previews. Run through the following checklist and you will be on your way!
+                </p>
+            </div>
+            <main class="main">
+                <!--#include file="_docroot.shtml" -->
+                <!--#include file="_makefile.shtml" -->
+            </main>
+            <!--#include file="_questions.shtml" -->
+        </div>
+    </body>
+</html>
+    
