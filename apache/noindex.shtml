@@ -1,10 +1,10 @@
 <html lang="en">
-    <head><!--#include virtual="_head.shtml" --></head>
+    <head><!--#include file="_head.shtml" --></head>
     <body>
         <div class="page">
             <div class="top">
                 <div class="page-title">
-                    <div class="svg svg--top"><!--#include virtual="_checkmark.svg" --></div>
+                    <div class="svg svg--top"><!--#include file="_checkmark.svg" --></div>
                     <h1>
                         Your Preview is Almost Ready
                     </h1>
@@ -15,10 +15,10 @@
                 </p>
             </div>
             <main class="main">
-                <!--#include virtual="_docroot.shtml" -->
-                <!--#include virtual="_makefile.shtml" -->
+                <!--#include file="_docroot.shtml" -->
+                <!--#include file="_makefile.shtml" -->
             </main>
-            <!--#include virtual="_questions.shtml" -->
+            <!--#include file="_questions.shtml" -->
         </div>
     </body>
 </html>
