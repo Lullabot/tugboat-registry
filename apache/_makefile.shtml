@@ -11,10 +11,4 @@
         <a href="https://docs2.tugboat.qa">documentation</a> for details on how to create a Tugboat build
         script.
     </p>
-    <p>
-        <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
-        Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> after you make any
-        changes to your build script. This will happen automatically for previews built for pull requests (or
-        merge requests), but needs to be done manually for other previews.
-    </p>
 </div>
