@@ -5,15 +5,26 @@
         <tt>docroot</tt> in your repository to serve content from. This is a common pattern, but many projects have their own
         preference. If your document root is in a different location you have a couple of different options.
     </p>
-    <h3>1. Move your content to /docroot in your repository.</h3>
-    <p>This is the most straightforward fix for Tugboat, but can be problematic if your repository has already been deployed
-        elsewhere. If you choose this option, be sure to follow up on other deployments to make sure things still work.
+    <h3>Option 1. Add a <tt>docroot/</tt> folder to your repository</h3>
+    <p>
+      This is the most straightforward fix for Tugboat, but can be problematic if your repository has already been 
+      deployed elsewhere. If you choose this option, create a <tt>docroot</tt> folder and move your existing content 
+      you want Apache to serve into that folder. Be sure to follow up on other deployments to make sure things still 
+      work.
     </p>
-    <h3>2. Create a build script.</h3>
-    <p>Build scripts can be used to perform any number of customizations to your preview. But, if all you need is to point apache
-    to a different location in your repository, a simple script like the following may be all you need. Add this to a file
-    named
-    <code>Makefile</code> in the root of your repository. Make sure the indent is a TAB, and not multiple spaces.</p>
+    <p>
+      <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
+      Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> after you make any changes to your 
+      build script. This will happen automatically for previews built for pull requests (or merge requests), but needs 
+      to be done manually for other previews.
+    </p>
+    <h3>Option 2. Create a build script.</h3>
+    <p>
+      Build scripts can be used to perform any number of customizations to your preview. But, if all you need is to 
+      point Apache to a different location in your repository, a simple script like the following may be all you need. 
+      Add this to a file named <code>Makefile</code> in the root of your repository. Make sure the indent is a TAB, 
+      and not multiple spaces.
+    </p>
     <div class="code">
         <div class="code__counters">
             <span class="code__counter"></span>
@@ -25,10 +36,14 @@ tugboat-init:
 </pre>
     </div>
     <p>
+      If the content you want to serve Apache lives in a folder other than <tt>public_html</tt>, be sure to change the 
+      folder name. 
+    </p>
+    <p>
         <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
-        Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> after you make any
-        changes to your build script. This will happen automatically for previews built for pull requests (or
-        merge requests), but needs to be done manually for other previews.
+        Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> after you make any changes to your 
+        build script. This will happen automatically for previews built for pull requests (or merge requests), but 
+        needs to be done manually for other previews.
     </p>
     <p>
         Read below for more information on build scripts.

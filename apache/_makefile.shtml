@@ -1,9 +1,9 @@
 <div class="section">
-    <h2>Do you need a build script?</h2>
+    <h2>Customizing Tugboat, with build scripts</h2>
     <p>
-        It is very likely that your repository will need a build script in order to work correctly with
-        Tugboat. The fact that you are seeing this page indicates that a build script is probably your next
-        step.
+      It is very likely that your repository will need a build script in order to work correctly with Tugboat. With 
+      build scripts you can import databases and image assets, run test scripts and programmically configure your 
+      services.
     </p>
     <p>
         Tugboat uses <a href="https://www.gnu.org/software/make/">GNU Make</a> to provide the opportunity to

@@ -10,8 +10,11 @@
                     </h1>
                 </div>
                 <p class="intro">
-                    Tugboat has successfully cloned your git repository, but we need a bit more information in order to
-                    display your previews. Run through the following checklist and you will be on your way!
+                    <!--#set var="settings" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_REPO_ID}/settings" -->
+                    Tugboat has successfully cloned your git repository and one or more 
+                    <a href="<!--#echo var="settings" -->">services</a> are running, but we need additional 
+                    information in order to display your previews. Run through the following checklist and you will 
+                    be on your way!
                 </p>
             </div>
             <main class="main">
