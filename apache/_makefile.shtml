@@ -22,8 +22,8 @@
         <span class="code__counter"></span>
       </div>
       <pre class="code__pre">
-      tugboat-init:
-      &#09;ln -sf $TUGBOAT_ROOT/public_html /var/www/html
+tugboat-init:
+&#09;ln -sf $TUGBOAT_ROOT/public_html /var/www/html
       </pre>
     </div>
     <p>
