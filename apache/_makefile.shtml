@@ -1,14 +1,46 @@
 <div class="section">
     <h2>Customizing Tugboat with a build script</h2>
     <p>
-      It is very likely that your repository will need a build script in order to work correctly with Tugboat. With 
-      build scripts you can import databases and image assets, run test scripts and programmically configure your 
-      services.
+      Tugboat uses <a href="https://www.gnu.org/software/make/">GNU Make</a> to 
+      provide the opportunity to run your own scripts at different points of a 
+      preview's life cycle. It is very likely that your repository will need a 
+      build script in order to work correctly with Tugboat. With build scripts 
+      you can change the location of your docroot folder, import databases and 
+      image assets, run test scripts and programmically configure your services.
+    </p>
+    <h3>Example Build Script: Linking to a different Document Root</h3>
+    <p>
+      If Tugboat just needs to look in a different folder within your repository 
+      to serve web content from, a simple script like the following may be all 
+      you need. Add the following lines to a file named <code>Makefile</code> in 
+      the root of your repository. Make sure the indent is a TAB, and not 
+      multiple spaces.
+    </p>
+    <div class="code">
+      <div class="code__counters">
+        <span class="code__counter"></span>
+        <span class="code__counter"></span>
+      </div>
+      <pre class="code__pre">
+      tugboat-init:
+      &#09;ln -sf $TUGBOAT_ROOT/public_html /var/www/html
+      </pre>
+    </div>
+    <p>
+      The above example instructs Tugboat to use the <code>public_html</code> 
+      folder inside your repository rather than <code>docroot</code>. If you 
+      copy this example, be sure to change the folder name if your directory 
+      structure is different.
     </p>
     <p>
-        Tugboat uses <a href="https://www.gnu.org/software/make/">GNU Make</a> to provide the opportunity to
-        run your own scripts at different points of a preview's life cycle. Check out our
-        <a href="https://docs2.tugboat.qa">documentation</a> for details on how to create a Tugboat build
-        script.
+      <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
+      Remember to rebuild the <a href="<!--#echo var="dashboard" -->">preview</a> 
+      after you make any changes to your build script. This will happen 
+      automatically for previews built for pull requests (or merge requests), 
+      but needs to be done manually for other previews.
+    </p>
+    <p>
+      Check out our <a href="https://docs2.tugboat.qa">documentation</a> for 
+      more information on creating a Tugboat build script.
     </p>
 </div>
