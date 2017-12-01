@@ -1,19 +1,19 @@
 <div class="section">
     <h2>Can Tugboat find your document root?</h2>
     <p>
-      Tugboat looks for a folder named <code>docroot</code> in your repository 
+      Tugboat looks for a folder named <code>/docroot</code> in your repository 
       to serve content from. This is a common pattern, but many projects have 
       their own preference. If your document root is in a different location 
-      you may want to add a <code>docroot/</code> folder to your repository or 
+      you may want to add a <code>/docroot</code> folder to your repository or 
       use a build script to customize Tugboat.
     </p>
-    <h3>Add a <code>docroot/</code> folder to your repository</h3>
     <p>
-      This is the most straightforward fix for Tugboat, but can be problematic 
-      if your repository has already been deployed elsewhere. If you choose this 
-      option, create a <code>docroot</code> folder and add your repository's web 
-      content. Also, If your site is deployed elsewhere, make sure each 
-      deployment still works as expected.
+      Creating a <code>/docroot</code> folder is the most straightforward fix 
+      for Tugboat, but can be problematic if your repository has already been 
+      deployed elsewhere. If you choose this option, create the 
+      <code>/docroot</code> folder and add your repository's web content. If 
+      your site is deployed elsewhere, make sure each deployment still works as 
+      expected.
     </p>
     <p>
       <!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
