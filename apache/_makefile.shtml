@@ -21,10 +21,10 @@
         <span class="code__counter"></span>
         <span class="code__counter"></span>
       </div>
-      <pre class="code__pre">
+<pre class="code__pre">
 tugboat-init:
 &#09;ln -sf $TUGBOAT_ROOT/public_html /var/www/html
-      </pre>
+</pre>
     </div>
     <p>
       The above example instructs Tugboat to use the <code>public_html</code> 
