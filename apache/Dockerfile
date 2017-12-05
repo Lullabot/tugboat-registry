@@ -32,6 +32,7 @@ COPY .htaccess \
      _head.shtml \
      _makefile.shtml \
      _questions.shtml \
+     _rebuild.shtml \
      _slack.svg \
      /var/www/__tugboat/
 
