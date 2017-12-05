@@ -5,17 +5,17 @@
       provide the opportunity to customize a preview at different points of its
       life cycle. It is very likely that a repository will need a build script
       in order to work correctly with Tugboat. A build script can be used to
-      can change the location of the docroot folder, import databases and
-      image assets, run test suites, or programmically configure a preview's
-      services.
+      change the location of the document root, import databases or image
+      assets, run test suites, or programmically configure a preview's services.
     </p>
     <h3>Example Build Script: Linking to a different Document Root</h3>
     <p>
       If Tugboat just needs to serve web content from a different folder in the
       repository, a simple build script like the following may be all it takes.
       Add the following lines to a file named <code>Makefile</code> in the root
-      of the repository. Be sure to use a TAB for the indent, and substitute
-      <code>public_html</code> with the correct value.
+      of the repository. The <code>$TUGBOAT_ROOT</code> variable points to the
+      root of the repository. Be sure to use a TAB for the indent, and
+      substitute <code>public_html</code> with the correct location.
     </p>
     <div class="code">
       <div class="code__counters">
