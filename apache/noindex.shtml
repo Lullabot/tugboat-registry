@@ -12,9 +12,10 @@
                 <p class="intro">
                     <!--#set var="settings" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_REPO_ID}/settings" -->
                     Tugboat has successfully cloned your git repository and your 
-                    <a href="<!--#echo var="settings" -->">configured services</a> are running, but we need additional 
-                    information in order to display your previews. Run through the following checklist and you will 
-                    be on your way!
+                    <a href="<!--#echo var="settings" -->">configured services</a>
+                    are running, but we need additional information in order to
+                    display your previews. Run through the following checklist
+                    and you will be on your way!
                 </p>
             </div>
             <main class="main">
@@ -25,4 +26,3 @@
         </div>
     </body>
 </html>
-    

@@ -10,7 +10,8 @@
                     </h1>
                 </div>
                 <p class="intro">
-                  You are almost there! Before Tugboat can build previews, one or more services need to be enabled and configured.
+                  You are almost there! Before Tugboat can build previews, one
+                  or more services need to be enabled and configured.
                 </p>
             </div>
             <main class="main">
@@ -19,11 +20,11 @@
                     <p>
                       <!--#set var="settings" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_REPO_ID}/settings" -->
                       Tugboat needs to know which services to make available for 
-                      your repository. This usually consists of a web server, 
-                      like Apache or Nginx, and maybe a database or key/value 
-                      storage service. Visit your 
-                      <a href="<!--#echo var="settings" -->">repository settings</a> 
-                      to configure the services that your application needs in 
+                      your repository. This usually consists of a web server,
+                      like Apache or Nginx, and maybe a database or key/value
+                      storage service. Visit your
+                      <a href="<!--#echo var="settings" -->">repository settings</a>
+                      to configure the services that your application needs in
                       order to operate correctly.
                     </p>
                 </div>
