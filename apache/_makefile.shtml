@@ -13,7 +13,7 @@
       If Tugboat just needs to serve web content from a different folder in the
       repository, a simple build script like the following may be all it takes.
       Add the following lines to a file named <code>Makefile</code> in the root
-      of the repository. The <code>$TUGBOAT_ROOT</code> variable points to the
+      of the repository. The <code>TUGBOAT_ROOT</code> variable points to the
       root of the repository. Be sure to use a TAB for the indent, and
       substitute <code>public_html</code> with the correct location.
     </p>
@@ -24,7 +24,7 @@
       </div>
 <pre class="code__pre">
 tugboat-init:
-&#09;ln -sf $TUGBOAT_ROOT/public_html /var/www/html
+&#09;ln -sf ${TUGBOAT_ROOT}/public_html /var/www/html
 </pre>
     </div>
     <!--#include file="_rebuild.shtml" -->
