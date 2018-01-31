@@ -7,7 +7,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM buildpack-deps:stretch-curl
+FROM localhost:5000/ubuntu
 
 # A few reasons for installing distribution-provided OpenJDK:
 #
@@ -136,7 +136,8 @@ RUN set -ex \
 
 COPY config ./config
 
-VOLUME /usr/share/elasticsearch/data
+# Tugboat doesn't use volumes like this.
+#VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /
 
