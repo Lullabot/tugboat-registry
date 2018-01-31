@@ -56,6 +56,7 @@ RUN set -ex; \
 		mkdir -p /usr/share/man/man1; \
 	fi; \
 	\
+	add-apt-repository -y ppa:openjdk-r/ppa; \
 	apt-get update; \
 	apt-get install -y \
 		openjdk-8-jre="$JAVA_DEBIAN_VERSION" \
