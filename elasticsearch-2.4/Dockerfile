@@ -143,6 +143,7 @@ COPY config ./config
 
 COPY docker-entrypoint.sh /
 
-EXPOSE 9200 9300
+# No need to expose ports for Tugboat.
+# EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
