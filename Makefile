@@ -12,6 +12,8 @@ apache-php7: apache
 apache-php7-drupal: apache-php7
 nginx-php: nginx
 nginx-php7: nginx
+elasticsearch-2.4: elasticsearch-baseimage
+elasticsearch-6: elasticsearch-baseimage
 
 baseimage:
 	docker pull ubuntu:14.04
