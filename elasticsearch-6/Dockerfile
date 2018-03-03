@@ -22,8 +22,6 @@ RUN echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo 
 
 RUN apt-get update && sudo apt-get install elasticsearch -y --no-install-recommends
 
-ENV PATH /usr/share/elasticsearch/bin:$PATH
-
 WORKDIR /usr/share/elasticsearch
 
 RUN set -ex \
@@ -33,16 +31,8 @@ RUN set -ex \
 		./config \
 		./config/scripts \
 	; do \
-		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
-
-COPY config ./config
-
-# Tugboat doesn't use volumes like this.
-#VOLUME /usr/share/elasticsearch/data
-
-COPY docker-entrypoint.sh /
 
 # No need to expose ports for Tugboat.
 # EXPOSE 9200 9300

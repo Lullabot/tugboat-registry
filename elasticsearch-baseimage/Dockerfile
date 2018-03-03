@@ -75,3 +75,24 @@ RUN set -ex; \
 
 # see CA_CERTIFICATES_JAVA_VERSION notes above
 #RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
+
+ENV PATH /usr/share/elasticsearch/bin:$PATH
+
+WORKDIR /usr/share/elasticsearch
+
+RUN set -ex \
+	&& for path in \
+		./data \
+		./logs \
+		./config \
+		./config/scripts \
+	; do \
+		mkdir -p "$path"; \
+	done
+
+COPY config ./config
+
+# Tugboat doesn't use volumes like this.
+#VOLUME /usr/share/elasticsearch/data
+
+COPY docker-entrypoint.sh /
