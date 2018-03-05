@@ -31,7 +31,6 @@ Docker repository as described above, perform the following steps to test your
 changes:
 
 1. `make <imagename>`
-1. `make push <imagename>`
 1. `docker create localhost:5000/<imagename>:latest`
 1. The previous command will output a hash for the created container; use it to start the container:
 
