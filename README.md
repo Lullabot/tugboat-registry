@@ -24,3 +24,14 @@ Then, push each of the newly generated Docker images to the local registry with
     make push
 
 See https://github.com/docker/distribution/releases for the latest version of the registry server
+
+## Testing Images
+If you have created or modified an image, and have already created a local
+Docker repository as described above, perform the following steps to test your
+changes:
+
+1. `make <imagename>`
+1. `docker create localhost:5000/<imagename>:latest`
+1. The previous command will output a hash for the created container; use it to start the container:
+
+    `docker start <containerhash>  -i`
