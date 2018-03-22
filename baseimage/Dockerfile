@@ -6,6 +6,9 @@ ADD . /bd_build
 RUN /bd_build/prepare.sh && \
 	/bd_build/system_services.sh && \
 	/bd_build/utilities.sh && \
-	/bd_build/cleanup.sh
+	/bd_build/cleanup.sh && \
+	mkdir -p /usr/share/tugboat
+
+COPY Makefile /usr/share/tugboat/Makefile
 
 CMD ["/sbin/my_init"]
