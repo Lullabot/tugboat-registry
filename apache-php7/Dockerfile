@@ -1,8 +1,39 @@
 FROM localhost:5000/apache
 
-RUN apt-get update && \
+RUN export PHP_VERSION=7.1 && \
+    apt-get update && \
     apt-get install -y python-software-properties software-properties-common && \
     LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
     apt-get update && \
-    apt-get -y --no-install-recommends install php7.0 php7.0-bcmath php7.0-bz2 php7.0-cli php7.0-common php7.0-curl php7.0-dev php7.0-enchant php7.0-fpm php7.0-gd php7.0-imap php7.0-intl php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql php7.0-opcache php7.0-pgsql php7.0-phpdbg php7.0-pspell php7.0-readline php7.0-recode php7.0-soap php7.0-sqlite3 php7.0-tidy php7.0-xml php7.0-xmlrpc php7.0-xsl php7.0-zip libapache2-mod-php7.0 && \
+    apt-get -y --no-install-recommends install \
+      php${PHP_VERSION} \
+      php${PHP_VERSION}-bcmath \
+      php${PHP_VERSION}-bz2 \
+      php${PHP_VERSION}-cli \
+      php${PHP_VERSION}-common \
+      php${PHP_VERSION}-curl \
+      php${PHP_VERSION}-dev \
+      php${PHP_VERSION}-enchant \
+      php${PHP_VERSION}-fpm \
+      php${PHP_VERSION}-gd \
+      php${PHP_VERSION}-imap \
+      php${PHP_VERSION}-intl \
+      php${PHP_VERSION}-json \
+      php${PHP_VERSION}-mbstring \
+      php${PHP_VERSION}-mcrypt \
+      php${PHP_VERSION}-mysql \
+      php${PHP_VERSION}-opcache \
+      php${PHP_VERSION}-pgsql \
+      php${PHP_VERSION}-phpdbg \
+      php${PHP_VERSION}-pspell \
+      php${PHP_VERSION}-readline \
+      php${PHP_VERSION}-recode \
+      php${PHP_VERSION}-soap \
+      php${PHP_VERSION}-sqlite3 \
+      php${PHP_VERSION}-tidy \
+      php${PHP_VERSION}-xml \
+      php${PHP_VERSION}-xmlrpc \
+      php${PHP_VERSION}-xsl \
+      php${PHP_VERSION}-zip \
+      libapache2-mod-php${PHP_VERSION} && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
