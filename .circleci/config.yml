@@ -30,9 +30,3 @@ jobs:
             test -n $(shopt -s nullglob; echo /var/lib/apt/lists/*)
             ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
             test -n $(shopt -s nullglob; echo /etc/ssh/ssh_host_*)
-
-workflows:
-  version: 2
-  test:
-    jobs:
-      - test
