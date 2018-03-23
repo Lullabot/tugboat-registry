@@ -9,7 +9,7 @@ jobs:
           command: |
             set -x
             locale -a | grep ^en_US$
-            locale -a | grep ^en_US.utf8$
+            locale -a | grep ^en_US\.utf8$
       # Test that upstart is diverted to /bin/true.
       # See baseimage/prepare.sh.
       - run:
@@ -27,7 +27,8 @@ jobs:
           command: |
             set -x
             ! test -e /bd_build
-            test -n $(shopt -s nullglob; echo /tmp/*)
+            # We can't test /tmp because CircleCI puts stuff here.
+            # test -n $(shopt -s nullglob; echo /tmp/*)
             test -n $(shopt -s nullglob; echo /var/tmp/*)
             test -n $(shopt -s nullglob; echo /var/lib/apt/lists/*)
             ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
