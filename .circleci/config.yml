@@ -1,0 +1,38 @@
+version: 2.0
+jobs:
+  test:
+    docker:
+      - image: q0rban/tugboat-baseimage:0.0.1
+    steps:
+      - run:
+          name: Test locales
+          command: |
+            locale -a | grep ^en_US$
+            locale -a | grep ^en_US.utf8$
+      # Test that upstart is diverted to /bin/true.
+      # See baseimage/prepare.sh.
+      - run:
+          name: Test upstart
+          command: /sbin/initctl
+      # Test that ischroot is diverted to /bin/true.
+      # See baseimage/prepare.sh.
+      - run:
+          name: Test ischroot
+          command: /usr/bin/ischroot
+      # Test that the cleanup script did what we expect.
+      # See baseimage/cleanup.sh
+      - run:
+          name: Test cleanup
+          command: |
+            ! test -e /bd_build
+            test -n $(shopt -s nullglob; echo /tmp/*)
+            test -n $(shopt -s nullglob; echo /var/tmp/*)
+            test -n $(shopt -s nullglob; echo /var/lib/apt/lists/*)
+            ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
+            test -n $(shopt -s nullglob; echo /etc/ssh/ssh_host_*)
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
