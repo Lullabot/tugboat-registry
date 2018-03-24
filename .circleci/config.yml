@@ -1,6 +1,10 @@
 version: 2.0
 jobs:
   build:
+    # Only build on the master branch, because it takes forever to complete.
+    branches:
+      only:
+        - master
     working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
@@ -52,5 +56,5 @@ workflows:
   version: 2
   test:
     jobs:
-      - build
       - test
+      - build
