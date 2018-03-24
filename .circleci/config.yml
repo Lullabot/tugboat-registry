@@ -1,5 +1,18 @@
 version: 2.0
 jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build images
+          command: |
+            apk update
+            apk add build-base
+            make
   test:
     docker:
       - image: q0rban/tugboat-baseimage:0.0.1
@@ -34,8 +47,10 @@ jobs:
             ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
             test -n $(shopt -s nullglob; echo /etc/ssh/ssh_host_*)
 
+
 workflows:
   version: 2
   test:
     jobs:
+      - build
       - test
