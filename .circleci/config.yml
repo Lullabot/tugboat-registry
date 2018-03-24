@@ -1,5 +1,22 @@
 version: 2.0
 jobs:
+  build:
+    # Only build on the master branch, because it takes forever to complete.
+    branches:
+      only:
+        - master
+    working_directory: /app
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build images
+          command: |
+            apk update
+            apk add build-base
+            make
   test:
     docker:
       - image: q0rban/tugboat-baseimage:0.0.2
@@ -39,8 +56,10 @@ jobs:
           name: Test Tugboat Makefile
           command: make -C /usr/share/tugboat test
 
+
 workflows:
   version: 2
   test:
     jobs:
       - test
+      - build
