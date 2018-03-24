@@ -1,28 +1,42 @@
-# This Makefile is intended to be used as an include inside of a Makefile for
-# your Tugboat project. To include it, place the following line at the top of
-# your Makefile:
-#
-# -include /usr/share/tugboat/Makefile
-#
-# Make sure to keep the hyphen at the beginning of the include if you want your
-# Makefile to work on non-Tugboat environments.
-#
-# Once the file is included in your Makefile, you can then use the targets in
-# this file to do things like install packages, install Drush, install a
-# specific version of PHP or nodejs, etc. The advantage to using Make to handle
-# these things is that it knows if a target has already run so that it won't run
-# it more than once. For example, consider the following Makefile:
-#
-# foo:
-# 	echo "foo"
-# bar: foo
-# 	echo "bar"
-# baz: foo bar
-# 	echo "baz"
-#
-# You might expect that running `make baz` would result in foo being output
-# twice, since baz calls bar which prints both foo and bar, but it doesn't. It
-# knows it's already run foo when it gets to bar.
+.PHONY: usage
+usage:
+	# This Makefile is intended to be used as an include inside of a Makefile
+	# for your Tugboat project. To include it, place the following line at the
+	# top of your Makefile:
+	#
+	# -include /usr/share/tugboat/Makefile
+	#
+	# Make sure to keep the hyphen at the beginning of the include if you want
+	# your Makefile to work on non-Tugboat environments.
+	#
+	# Alternately, you can call `$(MAKE) -C /usr/share/tugboat foo` from within
+	# a target if you don't want to include this Makefile in its entirety.
+	#
+	# Once the file is included in your Makefile, you can then use the targets
+	# in this file to do things like install packages, install Drush, install a
+	# specific version of PHP or nodejs, etc. The advantage to using Make to
+	# handle these things is that it knows if a target has already run so that
+	# it won't run it more than once. For example, consider the following
+	# Makefile:
+	#
+	# foo:
+	# 	echo "foo"
+	# bar: foo
+	# 	echo "bar"
+	# baz: foo bar
+	# 	echo "baz"
+	#
+	# You might expect that running `make baz` would result in foo being output
+	# twice, since baz calls bar which prints both foo and bar, but it doesn't.
+	# It knows it's already run foo when it gets to bar.
+	#
+	# To learn more about Make syntax:
+	#  - http://makefiletutorial.com/
+	#  - http://www.gnu.org/software/make/manual/make.html
+	#  - https://gist.github.com/isaacs/62a2d1825d04437c6f08
+	@true
+# The usage above is indented so that if you call `make` or `make usage`, on
+# this file, it will output it from that target as well.
 
 # We need bash to use =~ regex tests in if statements.
 SHELL := /bin/bash
@@ -35,7 +49,7 @@ export COMPOSER_NO_INTERACTION := 1
 composer_expected_signature = $(shell wget -q -O - https://composer.github.io/installer.sig)
 # Determine the current PHP version in MAJOR.MINOR format. We use a recursively
 # expanded variable so that it's only evaluated if we want the value.
-current_php_version = $(shell php -r "echo PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;")
+current_php_version = $(shell php -r "echo PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;" 2>/dev/null)
 
 # To keep build times faster, we can run apt-get update just once by having this
 # as a dependency to install-package-%.
@@ -106,9 +120,9 @@ install-php-%:
 	@if [ $* = ${current_php_version} ]; then\
 		echo "Current PHP Version is already ${current_php_version}.";\
 	else \
-		apt-get install -y python-software-properties software-properties-common &&\
-		add-apt-repository -y ppa:ondrej/php &&\
-		apt-get update &&\
+		apt-get install -y python-software-properties software-properties-common;\
+		LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php;\
+		apt-get update;\
 		apt-get install -y \
 			php$(*) \
 			php$(*)-mbstring \
@@ -137,9 +151,9 @@ install-php-%:
 			php$(*)-xml \
 			php$(*)-xsl \
 			php$(*)-zip \
-			libapache2-mod-php$(*) &&\
-		a2enmod php$(*) &&\
-		a2dismod php$(current_php_version) &&\
+			libapache2-mod-php$(*);\
+		a2enmod php$(*);\
+		a2dismod php$(current_php_version) || /bin/true;\
 		echo "PHP $(*) installed.";\
 	fi
 
@@ -161,3 +175,59 @@ install-nodejs-%: install-package-curl
 .PHONY: clean
 clean:
 	apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Test this Makefile
+.PHONY: test
+test:
+	######
+	# Test install-package-wget (install-package-%)
+	! hash wget 2>/dev/null
+	$(MAKE) install-package-wget
+	hash wget
+	apt-get remove wget -y
+
+	######
+	# Test install-php-7.2 (install-php-%)
+	! hash php 2>/dev/null
+	$(MAKE) install-php-7.2
+	php -v | grep ^PHP\ 7\.2
+
+	######
+	# Test install-composer
+	! hash composer 2>/dev/null
+	$(MAKE) install-composer
+	hash composer
+
+	######
+	# Test install-drush-launcher
+	! hash drush 2>/dev/null
+	$(MAKE) install-drush-launcher
+	hash drush
+	drush --version | grep '^The Drush launcher'
+	rm /usr/bin/drush
+
+	######
+	# Test install-drush
+	! hash drush 2>/dev/null
+	$(MAKE) install-drush
+	hash drush
+
+	######
+	# Test install-terminus
+	! hash terminus 2>/dev/null
+	$(MAKE) install-terminus
+	hash terminus
+
+	######
+	# Test install-nodejs-8 (install-nodejs-%)
+	! hash nodejs 2>/dev/null
+	$(MAKE) install-nodejs-8
+	hash nodejs
+	nodejs --version | grep ^v8
+
+	######
+	# Test clean
+	$(MAKE) clean
+	! ls /tmp/* 2>/dev/null
+	! ls /var/tmp/* 2>/dev/null
+	! ls /var/lib/apt/lists/* 2>/dev/null
