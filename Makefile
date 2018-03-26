@@ -37,3 +37,45 @@ tugboat-init:
 
 tugboat-build:
 	a2enmod include
+
+test-all: test-baseimage
+test-baseimage: baseimage
+	######
+	# Test locales are configured properly.
+	docker run localhost:5000/baseimage:latest locale -a | grep ^en_US$$
+	docker run localhost:5000/baseimage:latest locale -a | grep ^en_US\.utf8$$
+	@echo "Test passed.\n"
+
+	######
+	# Test that upstart is diverted to /bin/true.
+	# See baseimage/prepare.sh.
+	docker run localhost:5000/baseimage:latest /sbin/initctl
+	@echo "Test passed.\n"
+
+	######
+	# Test that ischroot is diverted to /bin/true.
+	# See baseimage/prepare.sh.
+	docker run localhost:5000/baseimage:latest /usr/bin/ischroot
+	@echo "Test passed.\n"
+
+	######
+	# Test that the cleanup script did what we expect.
+	# See baseimage/cleanup.sh
+	docker run localhost:5000/baseimage:latest sh -cex '\
+		! test -e /bd_build; \
+		! ls /tmp/* 2>/dev/null; \
+		! ls /var/tmp/* 2>/dev/null; \
+		! ls /var/lib/apt/lists/* 2>/dev/null; \
+		! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup; \
+		! ls /etc/ssh/ssh_host_* 2>/dev/null'
+	@echo "Test passed.\n"
+
+	######
+	# Test the included Makefile.
+	docker create -v /tests --name baseimage-test-container localhost:5000/baseimage:latest /bin/true
+	docker cp .circleci/test/* baseimage-test-container:/tests
+	docker run --volumes-from baseimage-test-container localhost:5000/baseimage:latest make -C /tests test
+	docker rm baseimage-test-container
+	@echo "Test passed.\n"
+
+	@echo "All tests passed!"
