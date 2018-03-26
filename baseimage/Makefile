@@ -125,10 +125,6 @@ install-php-%:
 		apt-get update;\
 		apt-get install -y \
 			php$(*) \
-			php$(*)-mbstring \
-			php$(*)-mysql \
-			php$(*)-xml \
-			php$(*)-zip \
 			php$(*)-bcmath \
 			php$(*)-bz2 \
 			php$(*)-cli \
