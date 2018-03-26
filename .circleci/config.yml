@@ -14,9 +14,12 @@ jobs:
             apk add build-base
             make
   test:
+    working_directory: /app
     docker:
-      - image: q0rban/tugboat-baseimage:0.0.1
+      - image: q0rban/tugboat-baseimage:0.0.2
     steps:
+      - checkout
+      # Test that Locales are configured correctly.
       - run:
           name: Test locales
           command: |
@@ -41,11 +44,15 @@ jobs:
             set -x
             ! test -e /bd_build
             # We can't test /tmp because CircleCI puts stuff here.
-            # test -n $(shopt -s nullglob; echo /tmp/*)
-            test -n $(shopt -s nullglob; echo /var/tmp/*)
-            test -n $(shopt -s nullglob; echo /var/lib/apt/lists/*)
+            #! ls /tmp/* 2>/dev/null
+            ! ls /var/tmp/* 2>/dev/null
+            ! ls /var/lib/apt/lists/* 2>/dev/null
             ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
-            test -n $(shopt -s nullglob; echo /etc/ssh/ssh_host_*)
+            ! ls /etc/ssh/ssh_host_* 2>/dev/null
+      # Test the included Makefile.
+      - run:
+          name: Test Tugboat Makefile
+          command: make -C /app/.circleci/test test
 
 
 workflows:
