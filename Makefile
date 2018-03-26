@@ -44,19 +44,19 @@ test-baseimage: baseimage
 	# Test locales are configured properly.
 	docker run localhost:5000/baseimage:latest locale -a | grep ^en_US$$
 	docker run localhost:5000/baseimage:latest locale -a | grep ^en_US\.utf8$$
-	@echo "Test passed.\n"
+	@printf "Test passed.\n\n"
 
 	######
 	# Test that upstart is diverted to /bin/true.
 	# See baseimage/prepare.sh.
 	docker run localhost:5000/baseimage:latest /sbin/initctl
-	@echo "Test passed.\n"
+	@printf "Test passed.\n\n"
 
 	######
 	# Test that ischroot is diverted to /bin/true.
 	# See baseimage/prepare.sh.
 	docker run localhost:5000/baseimage:latest /usr/bin/ischroot
-	@echo "Test passed.\n"
+	@printf "Test passed.\n\n"
 
 	######
 	# Test that the cleanup script did what we expect.
@@ -68,7 +68,7 @@ test-baseimage: baseimage
 		! ls /var/lib/apt/lists/* 2>/dev/null; \
 		! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup; \
 		! ls /etc/ssh/ssh_host_* 2>/dev/null'
-	@echo "Test passed.\n"
+	@printf "Test passed.\n\n"
 
 	######
 	# Test the included Makefile.
@@ -76,6 +76,6 @@ test-baseimage: baseimage
 	docker cp .circleci/test/* baseimage-test-container:/tests
 	docker run --volumes-from baseimage-test-container localhost:5000/baseimage:latest make -C /tests test
 	docker rm baseimage-test-container
-	@echo "Test passed.\n"
+	@printf "Test passed.\n\n"
 
-	@echo "All tests passed!"
+	@echo "All baseimage tests passed!"
