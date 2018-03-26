@@ -1,5 +1,8 @@
-.PHONY: usage
-usage:
+# The usage below is indented so that if you call `make` or `make usage`, on
+# this file, it will output it from that target as well as being readable from
+# the file directly.
+.PHONY: _help
+_help: ## Print out the help for this Makefile include.
 	# This Makefile is intended to be used as an include inside of a Makefile
 	# for your Tugboat project. To include it, place the following line at the
 	# top of your Makefile:
@@ -9,7 +12,7 @@ usage:
 	# Make sure to keep the hyphen at the beginning of the include if you want
 	# your Makefile to work on non-Tugboat environments.
 	#
-	# Alternately, you can call `$(MAKE) -C /usr/share/tugboat foo` from within
+	# Alternately, you can call '$$(MAKE) -C /usr/share/tugboat foo' from within
 	# a target if you don't want to include this Makefile in its entirety.
 	#
 	# Once the file is included in your Makefile, you can then use the targets
@@ -28,15 +31,27 @@ usage:
 	#
 	# You might expect that running `make baz` would result in foo being output
 	# twice, since baz calls bar which prints both foo and bar, but it doesn't.
-	# It knows it's already run foo when it gets to bar.
+	# It knows it's already run foo when it gets to bar. This means that if both
+	# composer and the drush-launcher require the wget package, apt-get will
+	# get called only once.
 	#
 	# To learn more about Make syntax:
 	#  - http://makefiletutorial.com/
 	#  - http://www.gnu.org/software/make/manual/make.html
 	#  - https://gist.github.com/isaacs/62a2d1825d04437c6f08
-	@true
-# The usage above is indented so that if you call `make` or `make usage`, on
-# this file, it will output it from that target as well.
+	#
+	# Allowed targets:
+	@$(MAKE) _targets
+
+# To add a target to the help, add a double comment (##) on the target line.
+.PHONY: _targets
+_targets: ## Print out the available targets in this include.
+# 	# The code below was adapted to allow for targets with % in them and to
+#	# continue to work even as an include. The original concept was taken from
+# 	# https://github.com/nodejs/node/blob/f05eaa4a537ed7ef57814d951d64c25ef2844720/Makefile#L73-L78.
+	@printf "For more targets and info see the comments in the Makefile.\n\n"
+	@grep -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(dir $(lastword $(MAKEFILE_LIST)))Makefile | sort | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 # We need bash to use =~ regex tests in if statements.
 SHELL := /bin/bash
@@ -54,19 +69,19 @@ current_php_version = $(shell php -r "echo PHP_MAJOR_VERSION . '.' . PHP_MINOR_V
 # To keep build times faster, we can run apt-get update just once by having this
 # as a dependency to install-package-%.
 .PHONY: packages-update
-packages-update:
+packages-update: ## Gets information on the newest versions of packages and their dependencies.
 	apt-get update
 
 # Install an apt package by passing the value. For example, to install wget, use
 # install-package-wget as the target.
 .PHONY: install-package-%
-install-package-%: packages-update
+install-package-%: packages-update ## Install a specific package on this distro by replacing %, e.g. install-package-wget.
 	apt-get install -y --no-install-recommends $(*)
 
 # Installs the latest version of Composer. Note, you should use install-php-%
 # first to ensure your desired version of PHP is installed.
 .PHONY: install-composer
-install-composer: install-package-wget
+install-composer: install-package-wget ## Installs the latest version of Composer.
 	$(info Installing Composer...)
 #	# The following code is adapted from https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
 	wget -O composer-setup.php https://getcomposer.org/installer
@@ -83,7 +98,7 @@ install-composer: install-package-wget
 
 # Installs the latest version of drush.
 .PHONY: install-drush
-install-drush: install-composer install-package-rsync
+install-drush: install-composer install-package-rsync ## Installs the latest version of drush.
 	$(info Installing Drush...)
 	composer --no-ansi global require drush/drush
 	ln -sf /root/.composer/vendor/bin/drush /usr/bin/drush
@@ -91,7 +106,7 @@ install-drush: install-composer install-package-rsync
 
 # Installs the drush-launcher instead of drush.
 .PHONY: install-drush-launcher
-install-drush-launcher: install-package-wget
+install-drush-launcher: install-package-wget ## Installs the drush-launcher instead of drush.
 	$(info Installing Drush Launcher...)
 	wget -O /tmp/drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
 	mv -f /tmp/drush.phar /usr/bin/drush
@@ -100,7 +115,7 @@ install-drush-launcher: install-package-wget
 
 # Install terminus for Pantheon sites.
 .PHONY: install-terminus
-install-terminus: install-composer install-package-rsync
+install-terminus: install-composer install-package-rsync ## Install terminus for Pantheon sites.
 	$(info Installing Terminus...)
 	curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar
 	php installer.phar install
@@ -109,7 +124,7 @@ install-terminus: install-composer install-package-rsync
 # Install a specific version of PHP by passing the version to this target. Use
 # major and minor versions separated by a dot. For example, install-php-7.2.
 .PHONY: install-php-%
-install-php-%:
+install-php-%: ## Install a specific version of PHP by replacing the %, e.g. install-php-7.2.
 	$(info Installing PHP $*...)
 #	# Ensure PHP version is correctly formatted.
 	@if [[ ! $* =~ ^[0-9]\.[0-9]$$ ]]; then\
@@ -156,7 +171,7 @@ install-php-%:
 # Install a specific version of nodejs by passing the version to this target.
 # Use the major version only. For example, install-nodejs-9.
 .PHONY: install-nodejs-%
-install-nodejs-%: install-package-curl
+install-nodejs-%: install-package-curl ## Install a specific version of nodejs by replacing the %, e.g. install-nodejs-8.
 	$(info Installing nodejs $*...)
 #	# Ensure nodejs version is correctly formatted.
 	@if [[ ! $* =~ ^[0-9]$$ ]]; then\
