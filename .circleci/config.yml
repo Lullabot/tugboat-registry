@@ -1,10 +1,6 @@
 version: 2.0
 jobs:
   build:
-    # Only build on the master branch, because it takes forever to complete.
-    branches:
-      only:
-        - master
     working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
@@ -45,16 +41,27 @@ jobs:
             set -x
             ! test -e /bd_build
             # We can't test /tmp because CircleCI puts stuff here.
-            # test -n $(shopt -s nullglob; echo /tmp/*)
-            test -n $(shopt -s nullglob; echo /var/tmp/*)
-            test -n $(shopt -s nullglob; echo /var/lib/apt/lists/*)
+            #! ls /tmp/* 2>/dev/null
+            ! ls /var/tmp/* 2>/dev/null
+            ! ls /var/lib/apt/lists/* 2>/dev/null
             ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
-            test -n $(shopt -s nullglob; echo /etc/ssh/ssh_host_*)
+            ! ls /etc/ssh/ssh_host_* 2>/dev/null
+      # Test the included Makefile.
+      - run:
+          name: Test Tugboat Makefile
+          command: make -C /app/.circleci/test test
 
 
 workflows:
   version: 2
+  build:
+    jobs:
+      - build
+    # Only build on the master branch, because it takes forever to complete.
+    filter:
+      branches:
+        only:
+          - master
   test:
     jobs:
       - test
-      - build
