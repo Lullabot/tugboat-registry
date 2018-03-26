@@ -1,10 +1,6 @@
 version: 2.0
 jobs:
   build:
-    # Only build on the master branch, because it takes forever to complete.
-    branches:
-      only:
-        - master
     working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
@@ -18,9 +14,11 @@ jobs:
             apk add build-base
             make
   test:
+    working_directory: /app
     docker:
       - image: q0rban/tugboat-baseimage:0.0.2
     steps:
+      - checkout
       # Test that Locales are configured correctly.
       - run:
           name: Test locales
@@ -54,12 +52,19 @@ jobs:
       # Test the included Makefile.
       - run:
           name: Test Tugboat Makefile
-          command: make -C /usr/share/tugboat test
+          command: make -C /app/.circleci/test test
 
 
 workflows:
   version: 2
+  build:
+    jobs:
+      - build
+    # Only build on the master branch, because it takes forever to complete.
+    filter:
+      branches:
+        only:
+          - master
   test:
     jobs:
       - test
-      - build
