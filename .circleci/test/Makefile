@@ -5,6 +5,12 @@ include /usr/share/tugboat/Makefile
 .PHONY: test
 test:
 	######
+	# Test _help and _targets
+	$(MAKE) _help | grep /usr/share/tugboat/Makefile > /dev/null
+	$(MAKE) _targets | grep install-package-% > /dev/null
+	@printf "Test passed.\n\n"
+
+	######
 	# Test install-package-wget (install-package-%)
 	! hash wget 2>/dev/null
 	$(MAKE) install-package-wget
