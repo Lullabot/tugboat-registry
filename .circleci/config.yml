@@ -13,50 +13,59 @@ jobs:
             apk update
             apk add build-base
             make
-  test:
+  test-baseimage:
     working_directory: /app
     docker:
-      - image: q0rban/tugboat-baseimage:0.0.2
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
+      - setup_remote_docker
+      - run:
+          name: Build baseimage
+          command: |
+            apk update
+            apk add build-base
+            make baseimage
       # Test that Locales are configured correctly.
       - run:
           name: Test locales
           command: |
             set -x
-            locale -a | grep ^en_US$
-            locale -a | grep ^en_US\.utf8$
+            docker run localhost:5000/baseimage:latest locale -a | grep ^en_US$
+            docker run localhost:5000/baseimage:latest locale -a | grep ^en_US\.utf8$
       # Test that upstart is diverted to /bin/true.
       # See baseimage/prepare.sh.
       - run:
           name: Test upstart
-          command: /sbin/initctl
+          command: docker run localhost:5000/baseimage:latest /sbin/initctl
       # Test that ischroot is diverted to /bin/true.
       # See baseimage/prepare.sh.
       - run:
           name: Test ischroot
-          command: /usr/bin/ischroot
+          command: docker run localhost:5000/baseimage:latest /usr/bin/ischroot
       # Test that the cleanup script did what we expect.
       # See baseimage/cleanup.sh
       - run:
           name: Test cleanup
           command: |
-            set -x
-            ! test -e /bd_build
-            # We can't test /tmp because CircleCI puts stuff here.
-            #! ls /tmp/* 2>/dev/null
-            ! ls /var/tmp/* 2>/dev/null
-            ! ls /var/lib/apt/lists/* 2>/dev/null
-            ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
-            ! ls /etc/ssh/ssh_host_* 2>/dev/null
+            docker run localhost:5000/baseimage:latest sh -cx '
+              ! test -e /bd_build
+              ! ls /tmp/* 2>/dev/null
+              ! ls /var/tmp/* 2>/dev/null
+              ! ls /var/lib/apt/lists/* 2>/dev/null
+              ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
+              ! ls /etc/ssh/ssh_host_* 2>/dev/null'
       # Test the included Makefile.
       - run:
           name: Test Tugboat Makefile
-          command: make -C /app/.circleci/test test
+          command: |
+            docker create -v /tests --name test-container localhost:5000/baseimage:latest /bin/true
+            docker cp /app/.circleci/test/* test-container:/tests
+            docker run --volumes-from test-container localhost:5000/baseimage:latest make -C /tests test
 
 
 workflows:
   version: 2
   test:
     jobs:
-      - test
+      - test-baseimage
