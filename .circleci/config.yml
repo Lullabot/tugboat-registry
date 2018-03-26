@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Test cleanup
           command: |
-            docker run localhost:5000/baseimage:latest sh -cx '
+            docker run localhost:5000/baseimage:latest sh -cex '
               ! test -e /bd_build
               ! ls /tmp/* 2>/dev/null
               ! ls /var/tmp/* 2>/dev/null
