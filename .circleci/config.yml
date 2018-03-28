@@ -13,51 +13,23 @@ jobs:
             apk update
             apk add build-base
             make
-  test:
+  test-baseimage:
+    working_directory: /app
     docker:
-      - image: q0rban/tugboat-baseimage:0.0.1
+      - image: docker:17.05.0-ce-git
     steps:
+      - checkout
+      - setup_remote_docker
       - run:
-          name: Test locales
+          name: Run image tests
           command: |
-            set -x
-            locale -a | grep ^en_US$
-            locale -a | grep ^en_US\.utf8$
-      # Test that upstart is diverted to /bin/true.
-      # See baseimage/prepare.sh.
-      - run:
-          name: Test upstart
-          command: /sbin/initctl
-      # Test that ischroot is diverted to /bin/true.
-      # See baseimage/prepare.sh.
-      - run:
-          name: Test ischroot
-          command: /usr/bin/ischroot
-      # Test that the cleanup script did what we expect.
-      # See baseimage/cleanup.sh
-      - run:
-          name: Test cleanup
-          command: |
-            set -x
-            ! test -e /bd_build
-            # We can't test /tmp because CircleCI puts stuff here.
-            # test -n $(shopt -s nullglob; echo /tmp/*)
-            test -n $(shopt -s nullglob; echo /var/tmp/*)
-            test -n $(shopt -s nullglob; echo /var/lib/apt/lists/*)
-            ! test -e /etc/dpkg/dpkg.cfg.d/02apt-speedup
-            test -n $(shopt -s nullglob; echo /etc/ssh/ssh_host_*)
+            apk update
+            apk add build-base
+            make test-all
 
 
 workflows:
   version: 2
-  build:
-    jobs:
-      - build
-    # Only build on the master branch, because it takes forever to complete.
-    filter:
-      branches:
-        only:
-          - master
   test:
     jobs:
-      - test
+      - test-baseimage
