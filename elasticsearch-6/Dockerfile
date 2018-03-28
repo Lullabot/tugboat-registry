@@ -34,6 +34,8 @@ RUN set -ex \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
+COPY elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+
 # No need to expose ports for Tugboat.
 # EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
