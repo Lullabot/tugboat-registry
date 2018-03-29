@@ -72,6 +72,7 @@ test-baseimage: baseimage
 
 	######
 	# Test the included Makefile.
+	docker rm baseimage-test-container 2&>/dev/null || true
 	docker create -v /tests --name baseimage-test-container localhost:5000/baseimage:latest /bin/true
 	docker cp .circleci/test/* baseimage-test-container:/tests
 	docker run --volumes-from baseimage-test-container localhost:5000/baseimage:latest make -C /tests test
