@@ -155,10 +155,14 @@ install-php-%: ## Install a specific version of PHP by replacing the %, e.g. ins
 			php$(*)-tidy \
 			php$(*)-xml \
 			php$(*)-xsl \
-			php$(*)-zip \
-			libapache2-mod-php$(*);\
-		a2enmod php$(*);\
-		a2dismod php$(current_php_version) || /bin/true;\
+			php$(*)-zip;\
+		if [[ "$$TUGBOAT_SERVICE" == apache* ]]; then\
+			$(MAKE) install-package-libapache2-mod-php$(*);\
+			a2enmod php$(*);\
+			a2dismod php$(current_php_version) || /bin/true;\
+		elif [[ "$$TUGBOAT_SERVICE" == nginx* ]]; then\
+			$(MAKE) install-package-php$(*)-fpm;\
+		fi;\
 		echo "PHP $(*) installed.";\
 	fi
 
