@@ -37,7 +37,7 @@ _targets: ## Print out the available targets in this include.
 #	# continue to work even as an include. The original concept was taken from
 # 	# https://github.com/nodejs/node/blob/f05eaa4a537ed7ef57814d951d64c25ef2844720/Makefile#L73-L78.
 	@printf "Available targets:\n\n"
-	@grep -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_path) | sort | \
+	@grep -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_dir)Makefile | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@printf "\nFor more targets and info see the comments in the Makefile.\n"
 
@@ -50,7 +50,7 @@ export COMPOSER_NO_INTERACTION := 1
 # Local variables below. Keep local variables lowercase to differentiate.
 #
 # Determine the path to this file.
-makefile_path := $(dir $(lastword $(MAKEFILE_LIST)))Makefile
+makefile_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 # A macro to retrieve the composer signature. This uses a recursively expanded
 # assignment so that it's only evaluated if needed.
 composer_expected_signature = $(shell wget -q -O - https://composer.github.io/installer.sig)
@@ -173,3 +173,7 @@ install-nodejs-%: install-package-curl ## Install a specific version of nodejs b
 	curl -sL https://deb.nodesource.com/setup_$(*).x | bash -
 	$(MAKE) install-package-nodejs
 	@echo "Installed nodejs $(*).x."
+
+# Include any *.mk files in /usr/share/tugboat. This allows other images to
+# add to or modify what's in here without having to overwrite this file.
+-include $(makefile_dir)*.mk
