@@ -121,12 +121,12 @@ install-terminus: install-composer install-package-rsync ## Install terminus for
 install-php-%: ## Install a specific version of PHP by replacing the %, e.g. install-php-7.2.
 	$(info Installing PHP $*...)
 #	# Ensure PHP version is correctly formatted.
-	@if [[ ! $* =~ ^[0-9]\.[0-9]$$ ]]; then\
+	@if [[ ! "$*" =~ ^[0-9]\.[0-9]$$ ]]; then\
 		echo "PHP version $* is an invalid format.";\
 		exit 1;\
 	fi
 #	# Ensure installed PHP version isn't the current version to be installed.
-	@if [ $* = ${current_php_version} ]; then\
+	@if [ "$*" = "${current_php_version}" ]; then\
 		echo "Current PHP Version is already ${current_php_version}.";\
 	else \
 		$(minimal-package-install) python-software-properties software-properties-common;\
