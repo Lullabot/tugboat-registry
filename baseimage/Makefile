@@ -49,6 +49,8 @@ export COMPOSER_NO_INTERACTION := 1
 #######
 # Local variables below. Keep local variables lowercase to differentiate.
 #
+# The command to run to install a package or packages.
+minimal-package-install := apt-get install --no-install-recommends -y
 # Determine the path to this file.
 makefile_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 # A macro to retrieve the composer signature. This uses a recursively expanded
@@ -68,7 +70,7 @@ packages-update: ## Gets information on the newest versions of packages and thei
 # install-package-wget as the target.
 .PHONY: install-package-%
 install-package-%: packages-update ## Install a specific package on this distro by replacing %, e.g. install-package-wget.
-	apt-get install -y --no-install-recommends $(*)
+	$(minimal-package-install) $(*)
 
 # Installs the latest version of Composer. Note, you should use install-php-%
 # first to ensure your desired version of PHP is installed.
@@ -127,10 +129,10 @@ install-php-%: ## Install a specific version of PHP by replacing the %, e.g. ins
 	@if [ $* = ${current_php_version} ]; then\
 		echo "Current PHP Version is already ${current_php_version}.";\
 	else \
-		apt-get install -y python-software-properties software-properties-common;\
+		$(minimal-package-install) python-software-properties software-properties-common;\
 		LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php;\
-		apt-get update;\
-		apt-get install -y \
+		$(MAKE) packages-update;\
+		$(minimal-package-install) \
 			php$(*) \
 			php$(*)-bcmath \
 			php$(*)-bz2 \
