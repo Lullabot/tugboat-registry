@@ -37,7 +37,7 @@ _targets: ## Print out the available targets in this include.
 #	# continue to work even as an include. The original concept was taken from
 # 	# https://github.com/nodejs/node/blob/f05eaa4a537ed7ef57814d951d64c25ef2844720/Makefile#L73-L78.
 	@printf "Available targets:\n\n"
-	@grep -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_path) | sort | \
+	@grep -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_dir)Makefile | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@printf "\nFor more targets and info see the comments in the Makefile.\n"
 
@@ -49,8 +49,10 @@ export COMPOSER_NO_INTERACTION := 1
 #######
 # Local variables below. Keep local variables lowercase to differentiate.
 #
+# The command to run to install a package or packages.
+minimal-package-install := apt-get install --no-install-recommends -y
 # Determine the path to this file.
-makefile_path := $(dir $(lastword $(MAKEFILE_LIST)))Makefile
+makefile_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 # A macro to retrieve the composer signature. This uses a recursively expanded
 # assignment so that it's only evaluated if needed.
 composer_expected_signature = $(shell wget -q -O - https://composer.github.io/installer.sig)
@@ -68,7 +70,7 @@ packages-update: ## Gets information on the newest versions of packages and thei
 # install-package-wget as the target.
 .PHONY: install-package-%
 install-package-%: packages-update ## Install a specific package on this distro by replacing %, e.g. install-package-wget.
-	apt-get install -y --no-install-recommends $(*)
+	$(minimal-package-install) $(*)
 
 # Installs the latest version of Composer. Note, you should use install-php-%
 # first to ensure your desired version of PHP is installed.
@@ -119,18 +121,18 @@ install-terminus: install-composer install-package-rsync ## Install terminus for
 install-php-%: ## Install a specific version of PHP by replacing the %, e.g. install-php-7.2.
 	$(info Installing PHP $*...)
 #	# Ensure PHP version is correctly formatted.
-	@if [[ ! $* =~ ^[0-9]\.[0-9]$$ ]]; then\
+	@if [[ ! "$*" =~ ^[0-9]\.[0-9]$$ ]]; then\
 		echo "PHP version $* is an invalid format.";\
 		exit 1;\
 	fi
 #	# Ensure installed PHP version isn't the current version to be installed.
-	@if [ $* = ${current_php_version} ]; then\
+	@if [ "$*" = "${current_php_version}" ]; then\
 		echo "Current PHP Version is already ${current_php_version}.";\
 	else \
-		apt-get install -y python-software-properties software-properties-common;\
+		$(minimal-package-install) python-software-properties software-properties-common;\
 		LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php;\
-		apt-get update;\
-		apt-get install -y \
+		$(MAKE) packages-update;\
+		$(minimal-package-install) \
 			php$(*) \
 			php$(*)-bcmath \
 			php$(*)-bz2 \
@@ -153,10 +155,14 @@ install-php-%: ## Install a specific version of PHP by replacing the %, e.g. ins
 			php$(*)-tidy \
 			php$(*)-xml \
 			php$(*)-xsl \
-			php$(*)-zip \
-			libapache2-mod-php$(*);\
-		a2enmod php$(*);\
-		a2dismod php$(current_php_version) || /bin/true;\
+			php$(*)-zip;\
+		if [[ "$$TUGBOAT_SERVICE" == apache* ]]; then\
+			$(MAKE) install-package-libapache2-mod-php$(*);\
+			a2enmod php$(*);\
+			a2dismod php$(current_php_version) || /bin/true;\
+		elif [[ "$$TUGBOAT_SERVICE" == nginx* ]]; then\
+			$(MAKE) install-package-php$(*)-fpm;\
+		fi;\
 		echo "PHP $(*) installed.";\
 	fi
 
@@ -173,3 +179,7 @@ install-nodejs-%: install-package-curl ## Install a specific version of nodejs b
 	curl -sL https://deb.nodesource.com/setup_$(*).x | bash -
 	$(MAKE) install-package-nodejs
 	@echo "Installed nodejs $(*).x."
+
+# Include any *.mk files in /usr/share/tugboat. This allows other images to
+# add to or modify what's in here without having to overwrite this file.
+-include $(makefile_dir)*.mk
