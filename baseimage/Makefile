@@ -126,12 +126,12 @@ install-php-%: ## Install a specific version of PHP by replacing the %, e.g. ins
 		exit 1;\
 	fi
 #	# Ensure installed PHP version isn't the current version to be installed.
-	@if [ "$*" = "${current_php_version}" ]; then\
+	@set -x; if [ "$*" = "${current_php_version}" ]; then\
 		echo "Current PHP Version is already ${current_php_version}.";\
 	else \
 		$(minimal-package-install) python-software-properties software-properties-common;\
 		LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php;\
-		$(MAKE) packages-update;\
+		$(MAKE) -B packages-update;\
 		$(minimal-package-install) \
 			php$(*) \
 			php$(*)-bcmath \
@@ -162,6 +162,7 @@ install-php-%: ## Install a specific version of PHP by replacing the %, e.g. ins
 			a2dismod php$(current_php_version) || /bin/true;\
 		elif [[ "$$TUGBOAT_SERVICE" == nginx* ]]; then\
 			$(MAKE) install-package-php$(*)-fpm;\
+			apt-get remove --auto-remove apache2 libapache2-mod-php7.2;\
 		fi;\
 		echo "PHP $(*) installed.";\
 	fi
