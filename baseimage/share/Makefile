@@ -1,33 +1,7 @@
-# Note for readers reading the source. $$(MAKE) should be $(MAKE). It is double
-# dollared to allow for printing this define in 'make _help'.
-define HELP_TEXT
-This Makefile is intended to be used as an include inside of a Makefile for your
-Tugboat project. To include it, place the following line at the top of your
-Makefile:
-
--include /usr/share/tugboat/Makefile
-
-Make sure to keep the hyphen at the beginning of the include if you want your
-Makefile to work on non-Tugboat environments.
-
-Alternately, you can call '$$(MAKE) -C /usr/share/tugboat foo' from within a
-target if you don't want to include this Makefile in its entirety.
-
-After you've included it, you may call 'make _targets' to see the available
-targets to use.
-
-To learn more about Make syntax:
- - http://makefiletutorial.com/
- - http://www.gnu.org/software/make/manual/make.html
- - https://gist.github.com/isaacs/62a2d1825d04437c6f08
-
-------------
-endef
-export HELP_TEXT
-
 .PHONY: _help
 _help: ## Print out the help for this Makefile include.
-	@printf "$$HELP_TEXT\n"
+	@cat $(makefile_dir)README.txt
+	@printf '\n%s\n' '-----------------------'
 	@$(MAKE) _targets
 
 # To add a target to the help, add a double comment (##) on the target line.
@@ -37,7 +11,7 @@ _targets: ## Print out the available targets in this include.
 #	# continue to work even as an include. The original concept was taken from
 # 	# https://github.com/nodejs/node/blob/f05eaa4a537ed7ef57814d951d64c25ef2844720/Makefile#L73-L78.
 	@printf "Available targets:\n\n"
-	@grep -h -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_dir){Makefile,*.mk} | sort | \
+	@grep -h -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_dir){Makefile,*.mk} 2>/dev/null | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@printf "\nFor more targets and info see the comments in the Makefile.\n"
 

@@ -39,7 +39,7 @@ tugboat-init:
 tugboat-build:
 	a2enmod include
 
-test-all: test-baseimage test-mysql
+test-all: test-baseimage
 test-baseimage: baseimage
 	######
 	# Test locales are configured properly.
@@ -81,9 +81,3 @@ test-baseimage: baseimage
 	@printf "Test passed.\n\n"
 
 	@echo "All baseimage tests passed!"
-
-test-mysql: mysql
-	######
-	# Test installing a specific version of MySQL works.
-	docker run localhost:5000/mysql:latest make -C /usr/share/tugboat install-mysql-5.6 | grep 'Installed MySQL 5\.6'
-	@printf "Test passed.\n\n"

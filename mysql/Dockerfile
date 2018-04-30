@@ -7,7 +7,6 @@ RUN mkdir /etc/service/mysql && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY my.cnf /etc/mysql/my.cnf
-COPY mysql.mk /usr/share/tugboat/mysql.mk
 
 RUN find /var/lib/mysql -type f -exec touch {} \; && \
     /usr/sbin/mysqld & \
