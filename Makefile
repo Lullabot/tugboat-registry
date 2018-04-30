@@ -10,6 +10,7 @@ apache-php: apache
 apache-php-drupal: apache-php
 apache-php7: apache
 apache-php7-drupal: apache-php7
+mysql-56: mysql
 nginx-php: nginx
 nginx-php7: nginx
 elasticsearch-2.4: elasticsearch-baseimage

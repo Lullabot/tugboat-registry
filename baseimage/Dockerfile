@@ -9,6 +9,6 @@ RUN /bd_build/prepare.sh && \
 	/bd_build/cleanup.sh && \
 	mkdir -p /usr/share/tugboat
 
-COPY Makefile /usr/share/tugboat/Makefile
+COPY share/* /usr/share/tugboat/
 
 CMD ["/sbin/my_init"]

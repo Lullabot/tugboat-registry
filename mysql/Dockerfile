@@ -8,7 +8,8 @@ RUN mkdir /etc/service/mysql && \
 
 COPY my.cnf /etc/mysql/my.cnf
 
-RUN /usr/sbin/mysqld & \
+RUN find /var/lib/mysql -type f -exec touch {} \; && \
+    /usr/sbin/mysqld & \
     sleep 10 && \
     mysql -e "GRANT ALL ON *.* TO tugboat@'%' IDENTIFIED BY 'tugboat' WITH GRANT OPTION; FLUSH PRIVILEGES"
 
