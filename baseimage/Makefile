@@ -37,7 +37,7 @@ _targets: ## Print out the available targets in this include.
 #	# continue to work even as an include. The original concept was taken from
 # 	# https://github.com/nodejs/node/blob/f05eaa4a537ed7ef57814d951d64c25ef2844720/Makefile#L73-L78.
 	@printf "Available targets:\n\n"
-	@grep -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_dir)Makefile | sort | \
+	@grep -h -E '^[a-zA-Z0-9%._-]+:.*?## .*$$' $(makefile_dir){Makefile,*.mk} | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@printf "\nFor more targets and info see the comments in the Makefile.\n"
 

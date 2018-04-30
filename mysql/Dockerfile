@@ -1,6 +1,6 @@
 FROM localhost:5000/ubuntu
 
-RUN mkdir -p /etc/service/mysql && \
+RUN mkdir /etc/service/mysql && \
 
     apt-get update && \
     apt-get -y --no-install-recommends install mysql-server && \
