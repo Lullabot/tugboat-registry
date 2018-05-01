@@ -62,6 +62,8 @@ install-composer: install-package-wget ## Installs the latest version of Compose
 	php composer-setup.php --install-dir=/tmp
 	mv -f /tmp/composer.phar /usr/local/bin/composer
 	rm composer-setup.php
+#	# Install hirak/prestissimo to speed up composer operations.
+	composer --no-ansi global require hirak/prestissimo
 	@echo "Composer installed."
 
 # Installs the latest version of drush.
