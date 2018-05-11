@@ -39,7 +39,7 @@ tugboat-init:
 tugboat-build:
 	a2enmod include
 
-test-all: test-baseimage
+test-all: test-baseimage test-mysql
 test-baseimage: baseimage
 	######
 	# Test locales are configured properly.
@@ -81,3 +81,24 @@ test-baseimage: baseimage
 	@printf "Test passed.\n\n"
 
 	@echo "All baseimage tests passed!"
+
+test-mysql: mysql
+#	# Ensure large prefix is on and file format is Barracuda.
+	@docker stop mysql-test-container 2&>/dev/null && \
+	  docker rm mysql-test-container 2&>/dev/null || true
+	@docker create --name mysql-test-container localhost:5000/mysql:latest
+	docker start mysql-test-container
+#	# Wait a bit for mysql to start running.
+	@echo "Starting MySQL."
+	@sleep 20
+	@docker exec -it mysql-test-container \
+	  mysql -u root --password="" \
+	  -N -B -e  "SELECT @@GLOBAL.innodb_large_prefix;" | grep -q 1 && \
+	  echo "innodb_large_prefix is on."
+	@docker exec -it mysql-test-container \
+	  mysql -u root --password="" \
+	  -N -B -e "SELECT @@GLOBAL.innodb_file_format;" | grep -q Barracuda && \
+	  echo "innodb_file_format is Barracuda."
+	@docker stop mysql-test-container >/dev/null && \
+	  docker rm mysql-test-container >/dev/null || true
+	@echo "Test passed."
