@@ -1,3 +1,10 @@
+## Deprecation Notice
+
+This repository is no longer maintained. Please see the following repository for
+new Tugboat images
+
+https://github.com/TugboatQA/images
+
 # tugboat-registry
 
 This repository contains the Docker build files to create all of the images
