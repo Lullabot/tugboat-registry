@@ -1,7 +1,0 @@
-<!--#set var="dashboard" value="https://${TUGBOAT_DASHBOARD}/${TUGBOAT_PREVIEW_ID}" -->
-<p>
-  Remember to rebuild <a href="<!--#echo var="dashboard" -->">this preview</a>
-  after any changes are made to the repository! This will happen
-  automatically for previews built for pull requests (or merge requests),
-  but needs to be done manually for other previews.
-</p>

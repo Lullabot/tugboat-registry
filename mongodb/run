@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-rm -f /var/lib/mongodb/mongod.lock
-exec /usr/bin/mongod --config /etc/mongod.conf

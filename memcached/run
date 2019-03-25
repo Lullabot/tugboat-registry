@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/usr/bin/memcached $(sed -e 's/#.*$//' -e '/^$/d' /etc/memcached.conf | sed -e :a -e '$!N; s/\n/ /; ta')

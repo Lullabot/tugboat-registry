@@ -1,4 +1,0 @@
-Options +Includes
-AddType text/html .shtml
-AddOutputFilter INCLUDES .shtml
-PassEnv TUGBOAT_DASHBOARD TUGBOAT_PREVIEW_ID TUGBOAT_REPO_ID
